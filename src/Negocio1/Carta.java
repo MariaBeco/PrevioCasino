@@ -45,6 +45,8 @@ public class Carta {
 
     @Override
     public String toString() {
-        return "Carta" + "numero= " + numero + ", palo= " + palo + ", ocupada= " + ocupada;
+        return  numero + " " + palo;
+        //return "Carta" + "Numero= " + numero + ", palo= " + palo + ", ocupada= " + ocupada;
+
     }
 }

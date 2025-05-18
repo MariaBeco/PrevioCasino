@@ -7,6 +7,7 @@ package Negocio1;
 public class Partido {
     private Juego myJuego[]=new Juego[2];
     private String numero;
+    private String nombrePartida;
     private String fecha;
     private int pagoApuestas;
     private Baraja barajaUsada;
@@ -14,12 +15,31 @@ public class Partido {
     public Partido(String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2,Baraja barajaU) {
         this.fecha = fecha;
         this.barajaUsada=barajaU;
+        this.nombrePartida=nombrePartida;
         this.crearJuego(myJugador1,  nombrePartida, myJugador2);
     }
+    
      private void crearJuego(Jugador myJugador1, String nombrePartida, Jugador myJugador2){
             this.myJuego[0]=new Juego(myJugador1, nombrePartida);
              this.myJuego[1]=new Juego(myJugador2, nombrePartida);
         }
+     
+    public String getNombrePartida() {
+        return nombrePartida;
+    }
+
+    public void setNombrePartida(String nombrePartida) {
+        this.nombrePartida = nombrePartida;
+    }
+
+    public Baraja getBarajaUsada() {
+        return barajaUsada;
+    }
+
+    public void setBarajaUsada(Baraja barajaUsada) {
+        this.barajaUsada = barajaUsada;
+    }
+     
     public Juego[] getMyJuego() {
         return myJuego;
     }

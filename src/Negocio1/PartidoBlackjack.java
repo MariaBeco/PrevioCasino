@@ -16,8 +16,15 @@ public class PartidoBlackjack extends Partido {
         super( fecha, myJugador1, nombrePartida, myJugador2,barajaU);
        
     }
-    public String[] enviarCartasInicio(Baraja barajaU){
-       return "";
+    public String[] enviarCartasInicio(){
+        super.getBarajaUsada().barajarCartas(super.getBarajaUsada());
+        String []cartasIniciales=new String[4];
+        for(Carta c:super.getBarajaUsada().getMyCartas()){
+            for(int i=0;i<4;i++){
+                cartasIniciales[i]=c.toString();
+            }
+        }
+       return cartasIniciales;
     }
     //inicio juego que devuelve cuatro cartas
 }
