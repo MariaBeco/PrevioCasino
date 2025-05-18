@@ -22,6 +22,7 @@ public class PartidoBlackjack extends Partido {
         for(Carta c:super.getBarajaUsada().getMyCartas()){
             for(int i=0;i<4;i++){
                 cartasIniciales[i]=c.toString();
+                c.setOcupada(true);
             }
         }
        return cartasIniciales;
