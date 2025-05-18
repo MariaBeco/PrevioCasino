@@ -6,13 +6,13 @@ package Negocio1;
 
 public class Partido {
     private Juego myJuego[]=new Juego[2];
-    private String numero;
+    private int numero;
     private String nombrePartida;
     private String fecha;
     private int pagoApuestas;
     private Baraja barajaUsada;
     
-    public Partido(String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2,Baraja barajaU) {
+    public Partido(String fecha, Jugador myJugador1, String nombrePartida,int numero, Jugador myJugador2,Baraja barajaU) {
         this.fecha = fecha;
         this.barajaUsada=barajaU;
         this.nombrePartida=nombrePartida;
@@ -48,11 +48,11 @@ public class Partido {
         this.myJuego = myJuego;
     }
 
-    public String getNumero() {
+    public int getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(int numero) {
         this.numero = numero;
     }
 

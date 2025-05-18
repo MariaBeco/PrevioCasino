@@ -63,11 +63,11 @@ public class Casino {
     }
 
     public void crearBaraja(int num) {
-        for (int i = 1; i<=this.myBarajas.size(); i++) {
+        for (int i = 1; i <= this.myBarajas.size(); i++) {
             this.myBarajas.add(new Baraja(i));
         }
     }
-    
+
     /*blackjack si son dos jugadores*/
     public String startBlackjackDos(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha) {
         if (this.myJugadores == null) {
@@ -79,19 +79,32 @@ public class Casino {
         if (this.validarApuesta(apuesta1) == false || this.validarApuesta(apuesta2) == false) {
             return "Una de las apuestas no es valida.";
         }
-        int jugador1=this.buscarIndiceJugador(cedula1);
+        int jugador1 = this.buscarIndiceJugador(cedula1); /*index jug 1*/
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
-        int jugador2=this.buscarIndiceJugador(cedula2);
+        int jugador2 = this.buscarIndiceJugador(cedula2); /*index jug2*/
         this.myJugadores.get(jugador2).setApuesta(apuesta2);
-        String nombre="Blackjack";
-        /*preguntar-->*/this.myBarajas.set(0, this.myBarajas.getFirst().barajarCartas(this.myBarajas.getFirst()));
-        this.myPartidos.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, this.myJugadores.get(jugador2),this.myBarajas.get(0)));
+        int numPartida=this.numPartida( this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
+        String nombre = "Blackjack";
+        /*preguntar-->*/
+        this.myBarajas.set(0, this.myBarajas.getFirst().barajarCartas(this.myBarajas.getFirst()));
+        this.myPartidos.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre,numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0)));
 //crear partido blackjack        
 //llama ese metodo y lo imprime en return
-        
+
         return "";
     }
-    
+
+    private int numPartida(Jugador jug1, Jugador jug2, String fecha) {
+        int numPartida = 0;
+        for (Partido p : this.myPartidos) {
+            Juego ar[] = p.getMyJuego();
+            if (ar[0].getMyJugador().equals(jug1) && ar[1].getMyJugador().equals(jug2) && p.getFecha() == fecha) {
+                numPartida++;
+            }
+        }
+         return numPartida;
+    } 
+
     private boolean validarApuesta(int apuesta) {
         boolean valido = false;
         if (apuesta >= 50000 && apuesta <= 500000) {
@@ -108,7 +121,7 @@ public class Casino {
         }
         return buscado;
     }
-    
+
     private int buscarIndiceJugador(String cedula) {
         int buscado = 0;
         for (Jugador e : this.myJugadores) {
