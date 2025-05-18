@@ -12,9 +12,12 @@ public class PartidoBlackjack extends Partido {
     private Jugador myGanador;
     private int puntajeGanador;
 
-    public PartidoBlackjack( String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2) {
-        super( fecha, myJugador1, nombrePartida, myJugador2);
+    public PartidoBlackjack( String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2,Baraja barajaU) {
+        super( fecha, myJugador1, nombrePartida, myJugador2,barajaU);
+       
     }
-    
-    
+    public String[] enviarCartasInicio(Baraja barajaU){
+       return "";
+    }
+    //inicio juego que devuelve cuatro cartas
 }

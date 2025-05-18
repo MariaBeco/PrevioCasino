@@ -103,6 +103,11 @@ public class Blackjack extends javax.swing.JFrame {
         btnOtra1.setBackground(new java.awt.Color(204, 0, 0));
         btnOtra1.setForeground(new java.awt.Color(255, 255, 255));
         btnOtra1.setText("Otra carta");
+        btnOtra1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOtra1ActionPerformed(evt);
+            }
+        });
 
         btnStop1.setBackground(new java.awt.Color(204, 0, 0));
         btnStop1.setForeground(new java.awt.Color(255, 255, 255));
@@ -225,7 +230,7 @@ public class Blackjack extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(lblJ2, javax.swing.GroupLayout.DEFAULT_SIZE, 19, Short.MAX_VALUE)
+                .addComponent(lblJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -524,6 +529,10 @@ public class Blackjack extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnStartActionPerformed
+
+    private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOtra1ActionPerformed
 
     /**
      * @param args the command line arguments

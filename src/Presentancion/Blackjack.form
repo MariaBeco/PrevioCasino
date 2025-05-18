@@ -223,6 +223,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Otra carta"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOtra1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnStop1">
           <Properties>
@@ -406,7 +409,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblJ2" pref="19" max="32767" attributes="0"/>
+                      <Component id="lblJ2" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="txtNombre2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>

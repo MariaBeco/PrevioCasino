@@ -67,7 +67,8 @@ public class Casino {
             this.myBarajas.add(new Baraja(i));
         }
     }
-
+    
+    /*blackjack si son dos jugadores*/
     public String startBlackjackDos(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha) {
         if (this.myJugadores == null) {
             return "No hay jugadores";
@@ -78,8 +79,15 @@ public class Casino {
         if (this.validarApuesta(apuesta1) == false || this.validarApuesta(apuesta2) == false) {
             return "Una de las apuestas no es valida.";
         }
-        Collections.shuffle(this.myBarajas.getFirst().getMyCartas());
-
+        int jugador1=this.buscarIndiceJugador(cedula1);
+        this.myJugadores.get(jugador1).setApuesta(apuesta1);
+        int jugador2=this.buscarIndiceJugador(cedula2);
+        this.myJugadores.get(jugador2).setApuesta(apuesta2);
+        String nombre="Blackjack";
+        /*preguntar-->*/this.myBarajas.set(0, this.myBarajas.getFirst().barajarCartas(this.myBarajas.getFirst()));
+        this.myPartidos.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, this.myJugadores.get(jugador2),this.myBarajas.get(0)));
+//crear partido blackjack        
+//llama ese metodo y lo imprime en return
         
         return "";
     }
@@ -97,6 +105,15 @@ public class Casino {
         for (Jugador e : this.myJugadores) {
             if (e.getCedula().equalsIgnoreCase(cedula));
             buscado = e;
+        }
+        return buscado;
+    }
+    
+    private int buscarIndiceJugador(String cedula) {
+        int buscado = 0;
+        for (Jugador e : this.myJugadores) {
+            if (!e.getCedula().equalsIgnoreCase(cedula));
+            buscado++;
         }
         return buscado;
     }

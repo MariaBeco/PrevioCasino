@@ -9,9 +9,11 @@ public class Partido {
     private String numero;
     private String fecha;
     private int pagoApuestas;
-
-    public Partido(String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2) {
+    private Baraja barajaUsada;
+    
+    public Partido(String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2,Baraja barajaU) {
         this.fecha = fecha;
+        this.barajaUsada=barajaU;
         this.crearJuego(myJugador1,  nombrePartida, myJugador2);
     }
      private void crearJuego(Jugador myJugador1, String nombrePartida, Jugador myJugador2){
