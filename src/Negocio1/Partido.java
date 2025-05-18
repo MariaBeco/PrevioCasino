@@ -27,7 +27,7 @@ public class Partido {
      
      public String pedirOtraCarta(){
          this.barajaUsada.barajarCartas(barajaUsada);
-         return this.barajaUsada.getMyCartas().getFirst().toString();   
+         return this.barajaUsada.getMyCartas().getFirst().toString(); 
      }
      
     public String getNombrePartida() {
