@@ -16,6 +16,7 @@ public class Partido {
         this.fecha = fecha;
         this.barajaUsada=barajaU;
         this.nombrePartida=nombrePartida;
+        this.numero=numero;
         this.crearJuego(myJugador1,  nombrePartida, myJugador2);
     }
     
@@ -23,6 +24,11 @@ public class Partido {
             this.myJuego[0]=new Juego(myJugador1, nombrePartida);
              this.myJuego[1]=new Juego(myJugador2, nombrePartida);
         }
+     
+     public String pedirOtraCarta(){
+         this.barajaUsada.barajarCartas(barajaUsada);
+         return this.barajaUsada.getMyCartas().getFirst().toString();   
+     }
      
     public String getNombrePartida() {
         return nombrePartida;
