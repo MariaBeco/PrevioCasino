@@ -17,12 +17,12 @@ public class Partido {
         this.barajaUsada=barajaU;
         this.nombrePartida=nombrePartida;
         this.numero=numero;
-        this.crearJuego(myJugador1,  nombrePartida, myJugador2);
+        this.crearJuegoDosJugadores(myJugador1,  nombrePartida, myJugador2);
     }
     
-     private void crearJuego(Jugador myJugador1, String nombrePartida, Jugador myJugador2){
+     private void crearJuegoDosJugadores(Jugador myJugador1, String nombrePartida, Jugador myJugador2){
             this.myJuego[0]=new Juego(myJugador1, nombrePartida);
-             this.myJuego[1]=new Juego(myJugador2, nombrePartida);
+            this.myJuego[1]=new Juego(myJugador2, nombrePartida);
         }
      
      public String pedirOtraCarta(){

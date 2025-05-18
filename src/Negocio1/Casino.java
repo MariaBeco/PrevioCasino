@@ -83,7 +83,7 @@ public class Casino {
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
         int jugador2 = this.buscarIndiceJugador(cedula2); /*index jug2*/
         this.myJugadores.get(jugador2).setApuesta(apuesta2);
-        int numPartida=this.numPartida( this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
+        int numPartida=this.numPartidaDosJugadores( this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
         String nombre = "Blackjack";
         /*preguntar-->*/
         this.myBarajas.set(0, this.myBarajas.getFirst().barajarCartas(this.myBarajas.getFirst()));
@@ -94,7 +94,7 @@ public class Casino {
         return "";
     }
 
-    private int numPartida(Jugador jug1, Jugador jug2, String fecha) {
+    private int numPartidaDosJugadores(Jugador jug1, Jugador jug2, String fecha) {
         int numPartida = 0;
         for (Partido p : this.myPartidos) {
             Juego ar[] = p.getMyJuego();
@@ -104,7 +104,18 @@ public class Casino {
         }
          return numPartida;
     } 
-
+    
+    public int contarPartidaJugador(Jugador obj, String fecha){
+    int numPartida=0;
+    for(Partido p: this.myPartidos){
+        Juego ju[]=p.getMyJuego();   
+        if(ju[0].getMyJugador().equals(obj)||ju[1].getMyJugador().equals(obj)&&p.getFecha()== fecha){
+        numPartida++;
+        }
+    }
+    return numPartida;
+    }
+    
     private boolean validarApuesta(int apuesta) {
         boolean valido = false;
         if (apuesta >= 50000 && apuesta <= 500000) {
