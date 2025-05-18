@@ -1,0 +1,54 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Negocio1;
+
+public class Partido {
+    private Juego myJuego[]=new Juego[2];
+    private String numero;
+    private String fecha;
+    private int pagoApuestas;
+
+    public Partido(String fecha, Jugador myJugador1, String nombrePartida, Jugador myJugador2) {
+        this.fecha = fecha;
+        this.crearJuego(myJugador1,  nombrePartida, myJugador2);
+    }
+     private void crearJuego(Jugador myJugador1, String nombrePartida, Jugador myJugador2){
+            this.myJuego[0]=new Juego(myJugador1, nombrePartida);
+             this.myJuego[1]=new Juego(myJugador2, nombrePartida);
+        }
+    public Juego[] getMyJuego() {
+        return myJuego;
+    }
+
+    public void setMyJuego(Juego[] myJuego) {
+        this.myJuego = myJuego;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+
+    public int getPagoApuestas() {
+        return pagoApuestas;
+    }
+
+    public void setPagoApuestas(int pagoApuestas) {
+        this.pagoApuestas = pagoApuestas;
+    }
+    
+}
