@@ -16,6 +16,7 @@ public class PartidoBlackjack extends Partido {
         super( fecha, myJugador1, nombrePartida, numP,myJugador2,barajaU);
        
     }
+    
     public String[] enviarCartasInicio(){
         super.getBarajaUsada().barajarCartas(super.getBarajaUsada());
         String []cartasIniciales=new String[4];
