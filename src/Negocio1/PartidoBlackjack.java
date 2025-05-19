@@ -20,12 +20,23 @@ public class PartidoBlackjack extends Partido {
     public String[] enviarCartasInicio(){
         super.getBarajaUsada().barajarCartas(super.getBarajaUsada());
         String []cartasIniciales=new String[4];
-        for(Carta c:super.getBarajaUsada().getMyCartas()){
+       Juego []juego=super.getMyJuego();
+       Carta [] cartaInicialJug1=new Carta[2];
+       Carta [] cartaInicialJug2=new Carta[2];
+      for(Carta c:super.getBarajaUsada().getMyCartas()){
             for(int i=0;i<4;i++){
                 cartasIniciales[i]=c.toString();
                 c.setOcupada(true);
             }
-        }
+      }  
+      for(Carta c:super.getBarajaUsada().getMyCartas()){
+                    for(int l=2;l<4;l++){
+                         for(int i=0; i<2;i++){
+                         cartaInicialJug1[i]=c;
+                           }
+                    cartaInicialJug2[l]=c;
+                     }
+           }
        return cartasIniciales;
     }
     public String hayBlackjack(){

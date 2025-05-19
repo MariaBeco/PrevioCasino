@@ -16,11 +16,10 @@ public class Principal extends javax.swing.JFrame {
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    
+    public Principal(Casino myCasino) {
         initComponents();
-        int caja=Ventana.leerInt("Digite el valor de caja inicial del casino");
-        int numBarajas=Ventana.leerInt("Digite el numero de barajas que tiene el casino");
-        this.myCasino=new Casino(caja, numBarajas);
+        this.myCasino=myCasino;
     }
 
     public Casino getMyCasino() {
@@ -385,7 +384,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjackActionPerformed
         // TODO add your handling code here:
-        Blackjack form1=new Blackjack(this);
+        Blackjack form1=new Blackjack(this,this.myCasino);
         form1.setVisible(true);
         
     }//GEN-LAST:event_btnSeleccionBlackjackActionPerformed
@@ -427,8 +426,9 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+           
             public void run() {
-                new Principal().setVisible(true);
+                new Principal(new Casino(Ventana.leerInt("Digite el valor de caja inicial del casino"), Ventana.leerInt("Digite el numero de barajas que tiene el casino"))).setVisible(true);
             }
         });
     }

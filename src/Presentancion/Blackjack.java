@@ -4,22 +4,30 @@
  */
 package Presentancion;
 
+import Negocio1.Casino;
 import java.time.LocalDate;
+import javax.swing.JLabel;
 
 /**
  *
  * @author saraj
  */
 public class Blackjack extends javax.swing.JFrame {
+
     private Principal myPrincipal;
+    private Casino myCasino;
+    private JLabel etiquetas[];
+
     /**
      * Creates new form Blackjack
      */
-    public Blackjack(Principal myPrincipal) {
+    public Blackjack(Principal myPrincipal, Casino myCasino) {
         initComponents();
-        this.myPrincipal=myPrincipal;
+        this.myPrincipal = myPrincipal;
+        this.myCasino = myCasino;
         LocalDate dt = LocalDate.now();
         this.lblFecha.setText(dt.toString());
+        this.myPrincipal.getMyCasino();
     }
 
     public Principal getMyPrincipal() {
@@ -59,12 +67,16 @@ public class Blackjack extends javax.swing.JFrame {
         txtNombre2 = new javax.swing.JTextField();
         txtApuesta2 = new javax.swing.JTextField();
         lblJ2 = new javax.swing.JLabel();
+        lblJnombre3 = new javax.swing.JLabel();
+        txtCedula2 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         lblJapuesta1 = new javax.swing.JLabel();
         lblJnombre1 = new javax.swing.JLabel();
         txtNombre1 = new javax.swing.JTextField();
         txtApuesta1 = new javax.swing.JTextField();
         lblJ1 = new javax.swing.JLabel();
+        lblJapuesta3 = new javax.swing.JLabel();
+        txtCedula1 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         lblC1J1 = new javax.swing.JLabel();
         lblC2J1 = new javax.swing.JLabel();
@@ -88,7 +100,7 @@ public class Blackjack extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnOtra.setBackground(new java.awt.Color(51, 153, 0));
         btnOtra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 4));
@@ -190,11 +202,11 @@ public class Blackjack extends javax.swing.JFrame {
 
         lblJapuesta2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJapuesta2.setForeground(new java.awt.Color(255, 255, 255));
-        lblJapuesta2.setText("APUESTA:");
+        lblJapuesta2.setText("APUESTA*");
 
         lblJnombre2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJnombre2.setForeground(new java.awt.Color(255, 255, 255));
-        lblJnombre2.setText("NOMBRE:");
+        lblJnombre2.setText("NOMBRE");
 
         txtNombre2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,39 +224,57 @@ public class Blackjack extends javax.swing.JFrame {
         lblJ2.setForeground(new java.awt.Color(255, 255, 255));
         lblJ2.setText("JUGADOR 2");
 
+        lblJnombre3.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblJnombre3.setForeground(new java.awt.Color(255, 255, 255));
+        lblJnombre3.setText("CEDULA*");
+
+        txtCedula2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedula2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblJapuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
-                            .addComponent(txtNombre2))
-                        .addGap(17, 17, 17))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblJapuesta2)
+                        .addGap(15, 15, 15)
+                        .addComponent(txtApuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(lblJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblJnombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCedula2)))
+                .addGap(17, 17, 17))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addComponent(lblJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJnombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJapuesta2))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 204, 0));
@@ -252,12 +282,17 @@ public class Blackjack extends javax.swing.JFrame {
 
         lblJapuesta1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJapuesta1.setForeground(new java.awt.Color(255, 255, 255));
-        lblJapuesta1.setText("APUESTA:");
+        lblJapuesta1.setText("APUESTA*");
 
         lblJnombre1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJnombre1.setForeground(new java.awt.Color(255, 255, 255));
-        lblJnombre1.setText("NOMBRE:");
+        lblJnombre1.setText("NOMBRE");
 
+        txtNombre1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtNombre1MousePressed(evt);
+            }
+        });
         txtNombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombre1ActionPerformed(evt);
@@ -274,39 +309,63 @@ public class Blackjack extends javax.swing.JFrame {
         lblJ1.setForeground(new java.awt.Color(255, 255, 255));
         lblJ1.setText("JUGADOR 1");
 
+        lblJapuesta3.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
+        lblJapuesta3.setForeground(new java.awt.Color(255, 255, 255));
+        lblJapuesta3.setText("CEDULA*");
+
+        txtCedula1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedula1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtApuesta1, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(txtNombre1))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(22, 22, 22))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                    .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(24, 24, 24)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(lblJapuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtCedula1)
+                            .addComponent(txtApuesta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+                            .addComponent(txtNombre1, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(17, 17, 17))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addComponent(lblJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(lblJ1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblJapuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(14, 14, 14))
         );
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.black, null, null));
@@ -375,16 +434,17 @@ public class Blackjack extends javax.swing.JFrame {
                             .addComponent(lblC2J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblC3J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblC4J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblC4J2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblC5J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblC1J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblC2J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblC1J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblC2J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(54, 54, 54)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblC4J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblC5J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(55, Short.MAX_VALUE))
@@ -429,19 +489,18 @@ public class Blackjack extends javax.swing.JFrame {
                                 .addComponent(btnStop1)
                                 .addGap(101, 101, 101)))
                         .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(btnStart)
+                            .addComponent(btnEvaluar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
+                                .addComponent(btnSaldo)
+                                .addGap(113, 113, 113))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
                                 .addComponent(btnOtra2)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnStop2)
-                                .addGap(88, 88, 88))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, btnOtraLayout.createSequentialGroup()
-                                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnStart)
-                                    .addComponent(btnEvaluar))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSaldo)
-                                .addGap(113, 113, 113)))))
+                                .addGap(88, 88, 88)))))
                 .addGap(51, 51, 51))
         );
         btnOtraLayout.setVerticalGroup(
@@ -454,21 +513,25 @@ public class Blackjack extends javax.swing.JFrame {
                     .addComponent(lblNumeroPartido))
                 .addGap(18, 18, 18)
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(40, 40, 40)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(btnStart)
-                .addGap(18, 18, 18)
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnStop1)
-                        .addComponent(btnOtra1))
-                    .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnStop2)
-                        .addComponent(btnOtra2)))
-                .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnStop1)
+                                .addComponent(btnOtra1))
+                            .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnStop2)
+                                .addComponent(btnOtra2)))
+                        .addGap(18, 18, 18))
+                    .addGroup(btnOtraLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(btnStart)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -534,15 +597,37 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-    
-        
-        
-        
+        String cedula1=this.txtCedula1.getText();
+         String cedula2=this.txtCedula2.getText();
+         int apuesta1=Integer.parseInt(this.txtApuesta1.getText());
+         int apuesta2=Integer.parseInt(this.txtApuesta2.getText());
+         String fecha=this.lblFecha.getText();
+         
+        String [] cartas=this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
+        JLabel cartasEtiqueda[] = {this.lblNumeroPartido,this.lblC1J1,this.lblC2J1,this.lblC1J2,this.lblC2J2 };
+        this.etiquetas=cartasEtiqueda;
+        for(int i=0;i<cartasEtiqueda.length;i++){
+                cartasEtiqueda[i].setText(cartas[i]);
+         }
+           
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOtra1ActionPerformed
+
+    private void txtNombre1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombre1MousePressed
+        // TODO add your handling code here:
+        this.txtNombre1.setText("");
+    }//GEN-LAST:event_txtNombre1MousePressed
+
+    private void txtCedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedula1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedula1ActionPerformed
+
+    private void txtCedula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedula2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedula2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -578,11 +663,15 @@ public class Blackjack extends javax.swing.JFrame {
     private javax.swing.JLabel lblJ2;
     private javax.swing.JLabel lblJapuesta1;
     private javax.swing.JLabel lblJapuesta2;
+    private javax.swing.JLabel lblJapuesta3;
     private javax.swing.JLabel lblJnombre1;
     private javax.swing.JLabel lblJnombre2;
+    private javax.swing.JLabel lblJnombre3;
     private javax.swing.JLabel lblNumeroPartido;
     private javax.swing.JTextField txtApuesta1;
     private javax.swing.JTextField txtApuesta2;
+    private javax.swing.JTextField txtCedula1;
+    private javax.swing.JTextField txtCedula2;
     private javax.swing.JTextArea txtJug1;
     private javax.swing.JTextArea txtJug2;
     private javax.swing.JTextField txtNombre1;

@@ -2,6 +2,7 @@ package Negocio1;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Casino {
 
@@ -173,6 +174,11 @@ public class Casino {
             if (!e.getCedula().equalsIgnoreCase(cedula));
             buscado++;
         }
+        Scanner sc=new Scanner(System.in);
+        for(Jugador j:this.myJugadores){
+            System.out.println(j);
+        }
         return buscado;
     }
+    
 }
