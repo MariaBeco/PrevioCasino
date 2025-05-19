@@ -22,6 +22,10 @@ public class Blackjack extends javax.swing.JFrame {
         this.lblFecha.setText(dt.toString());
     }
 
+    public Principal getMyPrincipal() {
+        return myPrincipal;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,16 +66,16 @@ public class Blackjack extends javax.swing.JFrame {
         txtApuesta1 = new javax.swing.JTextField();
         lblJ1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        lblC1J1 = new javax.swing.JLabel();
+        lblC2J1 = new javax.swing.JLabel();
+        lblC3J1 = new javax.swing.JLabel();
+        lblC5J1 = new javax.swing.JLabel();
+        lblC4J1 = new javax.swing.JLabel();
+        lblC5J2 = new javax.swing.JLabel();
+        lblC4J2 = new javax.swing.JLabel();
+        lblC1J2 = new javax.swing.JLabel();
+        lblC2J2 = new javax.swing.JLabel();
+        lblC3J2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -307,25 +311,25 @@ public class Blackjack extends javax.swing.JFrame {
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.black, null, null));
 
-        jLabel11.setText("jLabel11");
+        lblC1J1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel13.setText("jLabel11");
+        lblC2J1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel12.setText("jLabel11");
+        lblC3J1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel18.setText("jLabel18");
+        lblC5J1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel17.setText("jLabel17");
+        lblC4J1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel19.setText("jLabel18");
+        lblC5J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel20.setText("jLabel17");
+        lblC4J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel15.setText("jLabel11");
+        lblC1J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel16.setText("jLabel11");
+        lblC2J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
-        jLabel21.setText("jLabel11");
+        lblC3J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -335,29 +339,29 @@ public class Blackjack extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(32, 32, 32)
+                        .addComponent(lblC4J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(lblC5J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblC1J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblC2J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67)
-                        .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(36, 36, 36)
+                        .addComponent(lblC4J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(lblC5J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblC1J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
-                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblC2J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblC3J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(96, 96, 96))
         );
         jPanel4Layout.setVerticalGroup(
@@ -367,23 +371,23 @@ public class Blackjack extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
-                            .addComponent(jLabel16)
-                            .addComponent(jLabel21))
+                            .addComponent(lblC1J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC2J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC3J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel20)
-                            .addComponent(jLabel19)))
+                            .addComponent(lblC4J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC5J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel12))
+                            .addComponent(lblC1J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC2J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(54, 54, 54)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel18))))
-                .addContainerGap(109, Short.MAX_VALUE))
+                            .addComponent(lblC4J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblC5J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout btnOtraLayout = new javax.swing.GroupLayout(btnOtra);
@@ -426,15 +430,15 @@ public class Blackjack extends javax.swing.JFrame {
                                 .addGap(101, 101, 101)))
                         .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addGap(0, 8, Short.MAX_VALUE)
-                                .addComponent(btnStart)
-                                .addGap(102, 102, 102)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(btnOtra2)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnStop2)
                                 .addGap(88, 88, 88))
-                            .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addComponent(btnEvaluar)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, btnOtraLayout.createSequentialGroup()
+                                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnStart)
+                                    .addComponent(btnEvaluar))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSaldo)
                                 .addGap(113, 113, 113)))))
@@ -454,25 +458,26 @@ public class Blackjack extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(btnStart)
+                .addGap(18, 18, 18)
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnStop1)
                         .addComponent(btnOtra1))
                     .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnStop2)
-                        .addComponent(btnOtra2)
-                        .addComponent(btnStart)))
+                        .addComponent(btnOtra2)))
                 .addGap(18, 18, 18)
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
                     .addComponent(btnEvaluar)
                     .addComponent(btnSaldo))
-                .addGap(60, 60, 60))
+                .addGap(77, 77, 77))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -529,6 +534,10 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
+    
+        
+        
+        
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
@@ -546,24 +555,24 @@ public class Blackjack extends javax.swing.JFrame {
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop1;
     private javax.swing.JButton btnStop2;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblC1J1;
+    private javax.swing.JLabel lblC1J2;
+    private javax.swing.JLabel lblC2J1;
+    private javax.swing.JLabel lblC2J2;
+    private javax.swing.JLabel lblC3J1;
+    private javax.swing.JLabel lblC3J2;
+    private javax.swing.JLabel lblC4J1;
+    private javax.swing.JLabel lblC4J2;
+    private javax.swing.JLabel lblC5J1;
+    private javax.swing.JLabel lblC5J2;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblJ1;
     private javax.swing.JLabel lblJ2;

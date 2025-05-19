@@ -23,6 +23,10 @@ public class Principal extends javax.swing.JFrame {
         this.myCasino=new Casino(caja, numBarajas);
     }
 
+    public Casino getMyCasino() {
+        return myCasino;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

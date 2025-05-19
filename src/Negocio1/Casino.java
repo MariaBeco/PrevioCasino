@@ -5,6 +5,8 @@ import java.util.Collections;
 
 public class Casino {
 
+    private ArrayList<PartidoBlackjack> myPartidosB;
+    private ArrayList<PartidoPoker> myPartidosP;
     private ArrayList<Partido> myPartidos;
     private ArrayList<Jugador> myJugadores;
     private ArrayList<Crupier> myCrupiers;
@@ -17,9 +19,10 @@ public class Casino {
     //blackjack
     public Casino(int myCaja, int num) {
         this.myCaja = myCaja;
+        this.myPartidosB = new ArrayList<>();
         this.myJugadores = new ArrayList<>();
         this.myCrupiers = new ArrayList<>();
-        this.myBarajas = new ArrayList<Baraja>();
+        this.myBarajas = new ArrayList<>();
         this.crearBaraja(num);
     }
 
@@ -105,15 +108,19 @@ public class Casino {
         int numPartida=this.numPartidaDosJugadores( this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
         String nombre = "Blackjack";
         /*preguntar-->*/this.myBarajas.set(0, this.myBarajas.getFirst().barajarCartas(this.myBarajas.getFirst()));
-        this.myPartidos.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre,numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0)));
+        this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre,numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0)));
         Partido p=new Partido(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0));
-        cad=new String[4];
-        return cad;
-    }
+        int indexPartido=this.indexPartidoB(p);
+        
+        cad=new String[5];
+        cad[0]=Integer.toString(numPartida);
+        cad=this.myPartidosB.get(indexPartido).enviarCartasInicio();
     
-    private int indexPartido(Partido p){
+        return cad;
+    }   
+    private int indexPartidoB(Partido p){
         int index=0;
-        for(Partido par:this.myPartidos){
+        for(Partido par:this.myPartidosB){
             if(!par.equals(p)){
                 index++;
             }
