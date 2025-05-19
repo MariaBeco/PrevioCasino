@@ -331,23 +331,44 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionPokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionPokerActionPerformed
         // TODO add your handling code here:
+        Poker form2=new Poker(this);
+        form2.setVisible(true);
     }//GEN-LAST:event_btnSeleccionPokerActionPerformed
-
+    private void limpiarBotonesJug(){
+        this.txtCedula1.setText("");
+        this.txtNombre1.setText("");
+        this.txtTelefono1.setText("");
+    }
+    private void limpiarBotonesCrupier(){
+        this.txtCedula2.setText("");
+        this.txtNombre2.setText("");
+    }
     private void btnRegistrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar2ActionPerformed
         // TODO add your handling code here:
+        
+        if(this.txtCedula2.getText().isEmpty()||this.txtNombre2.getText().isEmpty()){
+            Ventana.imp("Digite todos los campos", "Error");
+            return;
+        }
         String nombre=this.txtNombre2.getText();
         String cedula=this.txtCedula2.getText();
         String rta=this.myCasino.registrarEmpleados(nombre, cedula);
         Ventana.imp(rta, "Mensaje");
+        this.limpiarBotonesCrupier();
     }//GEN-LAST:event_btnRegistrar2ActionPerformed
 
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
         // TODO add your handling code here:
+        if(this.txtCedula1.getText().isEmpty()||this.txtNombre1.getText().isEmpty()||this.txtTelefono1.getText().isEmpty()){
+            Ventana.imp("Digite todos los campos", "Error");
+            return;
+        }
         String nombre=this.txtNombre1.getText();
         String cedula=this.txtCedula1.getText();
         String telefono=this.txtTelefono1.getText();
         String rta=this.myCasino.registrarCliente(nombre, cedula, telefono);
         Ventana.imp(rta, "Mensaje");
+        this.limpiarBotonesJug();
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
 
     private void txtNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre2ActionPerformed
@@ -360,6 +381,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjackActionPerformed
         // TODO add your handling code here:
+        Blackjack form1=new Blackjack(this);
+        form1.setVisible(true);
         
     }//GEN-LAST:event_btnSeleccionBlackjackActionPerformed
 

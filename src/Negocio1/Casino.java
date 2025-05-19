@@ -38,8 +38,10 @@ public class Casino {
         boolean registrado = false;
 
         for (Crupier e : this.myCrupiers) {
-            if (e.getCedula().equalsIgnoreCase(cedula));
+            if (e.getCedula().equalsIgnoreCase(cedula)){
             registrado = true;
+            break;
+            }
         }
         return registrado;
     }
@@ -48,8 +50,10 @@ public class Casino {
         boolean registrado = false;
 
         for (Jugador e : this.myJugadores) {
-            if (e.getCedula().equalsIgnoreCase(cedula));
+            if (e.getCedula().equalsIgnoreCase(cedula)){
             registrado = true;
+            break;
+            }
         }
         return registrado;
     }
