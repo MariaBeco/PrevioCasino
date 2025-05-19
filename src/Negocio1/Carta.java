@@ -11,14 +11,16 @@ package Negocio1;
 public class Carta {
    private String numero;
    private String palo;
+   private int valor;
    private boolean ocupada;
 
-    public Carta(String numero, String palo,boolean ocupada) {
+    public Carta(String numero, String palo,boolean ocupada,int valor) {
         this.numero = numero;
         this.palo = palo;
+        this.valor=valor;
         this.ocupada=ocupada;
     }
-
+    
     public String getNumero() {
         return numero;
     }

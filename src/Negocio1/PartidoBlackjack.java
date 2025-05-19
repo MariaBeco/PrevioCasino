@@ -28,5 +28,8 @@ public class PartidoBlackjack extends Partido {
         }
        return cartasIniciales;
     }
+    public String hayBlackjack(){
+        return "";
+    }
     //inicio juego que devuelve cuatro cartas
 }
