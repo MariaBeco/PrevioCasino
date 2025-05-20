@@ -30,7 +30,6 @@ public class PartidoBlackjack extends Partido {
       for(Carta c:super.getBarajaUsada().getMyCartas()){
           if(!c.isOcupada()){
              cartasIniciales[cartasSeleccionadas]=c.toString();
-              System.out.println("carta "+c.toString());
              c.setOcupada(true);
              cartasSeleccionadas++;
           }  
@@ -67,7 +66,21 @@ public class PartidoBlackjack extends Partido {
         else cad="No hay BlackJack,¡Sigue jugando!:D";
         return cad;
     }
-    
+     public String hayBlackjack(Juego[] juego){
+         String cad="";
+         Juego myJug[]=super.getMyJuego();
+         Carta[] myCarta1=myJug[0].getMyCarta();
+         Carta[]myCarta2=myJug[1].getMyCarta();
+         int puntaje1=this.Puntaje(myCarta1);
+         int puntaje2=this.Puntaje(myCarta2);
+         if(puntaje1==21&&puntaje2==21){
+             cad="Ha ocurrido un empate";
+         }else if(puntaje1==21){
+             cad="¡ Jugador "+juego[0].getMyJugador().getNombre()+"hizo BlackJack!";
+             
+         }
+     return cad;
+     }
     
     public boolean esValorAs(Carta cart){
  
@@ -76,24 +89,23 @@ public class PartidoBlackjack extends Partido {
         return esA;
     }
     
-    public String calcularPuntajeMano(){
-        Juego [] juego= super.getMyJuego();
+    public int Puntaje(Carta []myCartas){
         int puntaje=0;
-        String cad="";
-        int contAs=0;
+        int contAs=0; 
+        Carta [] cartas=myCartas;
         for(int i=0;i<5;i++){
-            Carta [] cartas=juego[i].getMyCarta();
-            
-            if(this.esValorAs(cartas[i])==true&&contAs<1){
+            if(cartas[i]!=null){
+                if(this.esValorAs(cartas[i])==true&&contAs<1){
                 contAs++;
             }else if(this.esValorAs(cartas[i])==true&&contAs>1){
                 cartas[i].setValor(1);
                 contAs++;
             }
             puntaje += cartas[i].getValor();
+            }
         }
-        cad="Tu puntaje es de"+":";
-        return cad+puntaje;  
+
+        return puntaje;  
     }
     //inicio juego que devuelve cuatro cartas
 }

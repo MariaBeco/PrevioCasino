@@ -92,52 +92,31 @@ public class Casino {
             cad[0] = "Una de las apuestas no es valida.";
             return cad;
         }
-        int jugador1 = this.buscarIndiceJugador(cedula1);
-        /*index jug 1*/
-        System.out.println("indx 1 " + jugador1);
+        int jugador1 = this.buscarIndiceJugador(cedula1);/*index jug 1*/
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
         int jugador2 = this.buscarIndiceJugador(cedula2);/*index jug2*/
-        System.out.println("indx 2 " + jugador2);
         this.myJugadores.get(jugador2).setApuesta(apuesta2);
 
         int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
         int numJug2 = this.contarPartidaJugador(this.myJugadores.get(jugador2), fecha);
 
-        System.out.println("num1 " + numJug1 + " num2 " + numJug2);
         if (numJug1 > 10 || numJug2 > 10) {
             cad[0] = "No se puede iniciar la partida porque alguno de los dos jugadores lleva 10 partidas";
             return cad;
         }
-        System.out.println("error");
         this.myJugadores.get(jugador1).setNumJugadaDia(numJug1);
         this.myJugadores.get(jugador2).setNumJugadaDia(numJug2);
-        System.out.println("error1");
+
         int numPartida = this.numPartidaDosJugadores(this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
         String nombre = "Blackjack";
-        System.out.println("error2");
-        if (this.myBarajas == null || this.myBarajas.isEmpty()) {
-            System.out.println("No hay barajas disponibles");
-        }
 
         this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0)));
-        System.out.println("error3");
         PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0));
 
         int indexPartido = this.indexPartidoB(p);
-        System.out.println("index partido " + indexPartido);
         cad = new String[5];
-        System.out.println("error3");
         cad[0] = Integer.toString(numPartida+1);
-        System.out.println("error3");
         String cartas[]=this.myPartidosB.get(indexPartido).enviarCartasInicio();
-        System.out.println("error3");
-        for(int i=1;i<5;i++){
-            cad[i]=cartas[i-1];
-            System.out.println(cad [i]);
-        }
-        for(String carta:cad){
-            System.out.println("carta "+carta);
-        }
         return cad;
     }
 
@@ -222,5 +201,8 @@ public class Casino {
         }
         return buscado;
     }
-
+    public String haberBlackJack(){
+        
+        return"";
+    } 
 }
