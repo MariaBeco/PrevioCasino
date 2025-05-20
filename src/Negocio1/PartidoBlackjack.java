@@ -60,7 +60,6 @@ public class PartidoBlackjack extends Partido {
         return cad;
     }
     
-    
     public boolean darleValorAs(Carta cart){
         //la primera a siempre vale 11 si hay mas vale 1<----
         boolean esA=false;
