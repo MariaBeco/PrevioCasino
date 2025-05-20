@@ -7,6 +7,7 @@ package Presentancion;
 import Negocio1.Casino;
 import java.time.LocalDate;
 import javax.swing.JLabel;
+import Presentacion.Ventana;
 
 /**
  *
@@ -598,9 +599,13 @@ public class Blackjack extends javax.swing.JFrame {
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
         if(this.txtCedula1.getText().isEmpty()||this.txtCedula2.getText().isEmpty()||this.txtApuesta1.getText().isEmpty()||this.txtApuesta2.getText().isEmpty()){
-        this.txtJug1.setText("¡Digite todos los campos!");
-        this.txtJug2.setText("¡Digite todos los campos!");
+            Ventana.imp("¡Digite todos los campos!", "Sistema");
         return;
+        }
+        
+        if(this.myCasino.validarCedulaJugador(this.txtCedula1.getText())==false||this.myCasino.validarCedulaJugador(this.txtCedula2.getText())==false){
+            Ventana.imp("Alguna de las cedulas digitadas no fue registrada.", "Sistema");
+            return;
         }
         
         String cedula1=this.txtCedula1.getText();
