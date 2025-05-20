@@ -62,10 +62,27 @@ public class PartidoBlackjack extends Partido {
     
     
     public boolean darleValorAs(Carta cart){
-        //la primera a siempre vale 11 si hay mas vale 1<----
+ 
         boolean esA=false;
         if(cart.getValor()==11)esA=true;
         return esA;
+    }
+    
+    public String calcularPuntajeMano(){
+        Juego [] juego= super.getMyJuego();
+        int puntaje=0;
+        String cad="";
+        int contAs=0;
+        for(int i=0;i<5;i++){
+            Carta [] cartas=juego[i].getMyCarta();
+            if(this.darleValorAs(cartas[i])==true&&contAs>1){
+                cartas[i].setValor(1);         
+            }
+            puntaje += cartas[i].getValor();
+        }
+        if(puntaje==21)return "¡Tu puntaje es de 21!";
+        else cad="Tu puntaje es de: ";
+        return cad+puntaje;  
     }
     //inicio juego que devuelve cuatro cartas
 }
