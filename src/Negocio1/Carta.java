@@ -45,6 +45,14 @@ public class Carta {
         this.ocupada = ocupada;
     }
 
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+    
     @Override
     public String toString() {
         return  numero + " " + palo;
