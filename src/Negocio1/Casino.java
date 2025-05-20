@@ -126,12 +126,18 @@ public class Casino {
         int indexPartido = this.indexPartidoB(p);
         System.out.println("index partido " + indexPartido);
         cad = new String[5];
-        cad[0] = Integer.toString(numPartida);
+        System.out.println("error3");
+        cad[0] = Integer.toString(numPartida+1);
+        System.out.println("error3");
         String cartas[]=this.myPartidosB.get(indexPartido).enviarCartasInicio();
+        System.out.println("error3");
         for(int i=1;i<5;i++){
             cad[i]=cartas[i-1];
+            System.out.println(cad [i]);
         }
-
+        for(String carta:cad){
+            System.out.println("carta "+carta);
+        }
         return cad;
     }
 

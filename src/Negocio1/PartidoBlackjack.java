@@ -22,23 +22,31 @@ public class PartidoBlackjack extends Partido {
     public String[] enviarCartasInicio(){
         super.getBarajaUsada().barajarCartas(super.getBarajaUsada());
         String []cartasIniciales=new String[4];
+        int cartasSeleccionadas=0;
+        int asignarCarta=0;
         Juego [] juego=super.getMyJuego();
         Carta [] cartaInicialJug1=new Carta[2];
         Carta [] cartaInicialJug2=new Carta[2];
       for(Carta c:super.getBarajaUsada().getMyCartas()){
-            for(int i=0;i<4;i++){
-                cartasIniciales[i]=c.toString();
-                c.setOcupada(true);
-            }
+          if(!c.isOcupada()){
+             cartasIniciales[cartasSeleccionadas]=c.toString();
+              System.out.println("carta "+c.toString());
+             c.setOcupada(true);
+             cartasSeleccionadas++;
+          }  
+            if(cartasSeleccionadas==4){
+                    break;
+                }
       }  
-      for(Carta c:super.getBarajaUsada().getMyCartas()){
+  
+      /*for(Carta c:super.getBarajaUsada().getMyCartas()){
                     for(int l=2;l<4;l++){
                          for(int i=0; i<2;i++){
                          cartaInicialJug1[i]=c;
                            }
                     cartaInicialJug2[l]=c;
                      }
-           }
+           }*/
        return cartasIniciales;
     }
     
