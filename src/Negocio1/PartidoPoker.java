@@ -38,7 +38,7 @@ public class PartidoPoker extends Partido{
                 contAs++;
             }else if(this.esValorAs(cartas[i])==true&&contAs>1){
                 cartas[i].setValor(1);
-            }
+            } 
              
         }*/
         

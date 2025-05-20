@@ -597,6 +597,12 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
+        if(this.txtCedula1.getText().isEmpty()||this.txtCedula2.getText().isEmpty()||this.txtApuesta1.getText().isEmpty()||this.txtApuesta2.getText().isEmpty()){
+        this.txtJug1.setText("¡Digite todos los campos!");
+        this.txtJug2.setText("¡Digite todos los campos!");
+        return;
+        }
+        
         String cedula1=this.txtCedula1.getText();
          String cedula2=this.txtCedula2.getText();
          int apuesta1=Integer.parseInt(this.txtApuesta1.getText());
