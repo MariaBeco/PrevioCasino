@@ -50,7 +50,7 @@ public class PartidoBlackjack extends Partido {
         int contAs=0;
         for(int i=0;i<2;i++){
             Carta [] cartas=juego[i].getMyCarta();
-            if(this.darleValorAs(cartas[i])==true&&contAs>1){
+            if(this.esValorAs(cartas[i])==true&&contAs>1){
                 cartas[i].setValor(1);         
             }
             puntaje += cartas[i].getValor();
@@ -61,7 +61,7 @@ public class PartidoBlackjack extends Partido {
     }
     
     
-    public boolean darleValorAs(Carta cart){
+    public boolean esValorAs(Carta cart){
  
         boolean esA=false;
         if(cart.getValor()==11)esA=true;
@@ -75,13 +75,17 @@ public class PartidoBlackjack extends Partido {
         int contAs=0;
         for(int i=0;i<5;i++){
             Carta [] cartas=juego[i].getMyCarta();
-            if(this.darleValorAs(cartas[i])==true&&contAs>1){
-                cartas[i].setValor(1);         
+            
+            if(this.esValorAs(cartas[i])==true&&contAs<1){
+                contAs++;
+            }else if(this.esValorAs(cartas[i])==true&&contAs>1){
+                cartas[i].setValor(1);
+                contAs++;
             }
             puntaje += cartas[i].getValor();
         }
         if(puntaje==21)return "¡Tu puntaje es de 21!";
-        else cad="Tu puntaje es de: ";
+        else cad="Tu puntaje es de"+":";
         return cad+puntaje;  
     }
     //inicio juego que devuelve cuatro cartas
