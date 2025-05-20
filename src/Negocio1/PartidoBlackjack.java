@@ -84,8 +84,7 @@ public class PartidoBlackjack extends Partido {
             }
             puntaje += cartas[i].getValor();
         }
-        if(puntaje==21)return "¡Tu puntaje es de 21!";
-        else cad="Tu puntaje es de"+":";
+        cad="Tu puntaje es de"+":";
         return cad+puntaje;  
     }
     //inicio juego que devuelve cuatro cartas
