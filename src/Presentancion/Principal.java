@@ -12,20 +12,22 @@ import Presentacion.Ventana;
  * @author saraj
  */
 public class Principal extends javax.swing.JFrame {
+
     private Casino myCasino;
+
     /**
      * Creates new form Principal
      */
-    
+
     public Principal(Casino myCasino) {
         initComponents();
-        this.myCasino=myCasino;
+        this.myCasino = myCasino;
     }
 
     public Casino getMyCasino() {
         return myCasino;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -334,42 +336,43 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionPokerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionPokerActionPerformed
         // TODO add your handling code here:
-        Poker form2=new Poker(this);
+        Poker form2 = new Poker(this);
         form2.setVisible(true);
     }//GEN-LAST:event_btnSeleccionPokerActionPerformed
-    private void limpiarBotonesJug(){
+    private void limpiarBotonesJug() {
         this.txtCedula1.setText("");
         this.txtNombre1.setText("");
         this.txtTelefono1.setText("");
     }
-    private void limpiarBotonesCrupier(){
+
+    private void limpiarBotonesCrupier() {
         this.txtCedula2.setText("");
         this.txtNombre2.setText("");
     }
     private void btnRegistrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar2ActionPerformed
         // TODO add your handling code here:
-        
-        if(this.txtCedula2.getText().isEmpty()||this.txtNombre2.getText().isEmpty()){
+
+        if (this.txtCedula2.getText().isEmpty() || this.txtNombre2.getText().isEmpty()) {
             Ventana.imp("Digite todos los campos", "Error");
             return;
         }
-        String nombre=this.txtNombre2.getText();
-        String cedula=this.txtCedula2.getText();
-        String rta=this.myCasino.registrarEmpleados(nombre, cedula);
+        String nombre = this.txtNombre2.getText();
+        String cedula = this.txtCedula2.getText();
+        String rta = this.myCasino.registrarEmpleados(nombre, cedula);
         Ventana.imp(rta, "Mensaje");
         this.limpiarBotonesCrupier();
     }//GEN-LAST:event_btnRegistrar2ActionPerformed
 
     private void btnRegistrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrar1ActionPerformed
         // TODO add your handling code here:
-        if(this.txtCedula1.getText().isEmpty()||this.txtNombre1.getText().isEmpty()||this.txtTelefono1.getText().isEmpty()){
+        if (this.txtCedula1.getText().isEmpty() || this.txtNombre1.getText().isEmpty() || this.txtTelefono1.getText().isEmpty()) {
             Ventana.imp("Digite todos los campos", "Error");
             return;
         }
-        String nombre=this.txtNombre1.getText();
-        String cedula=this.txtCedula1.getText();
-        String telefono=this.txtTelefono1.getText();
-        String rta=this.myCasino.registrarCliente(nombre, cedula, telefono);
+        String nombre = this.txtNombre1.getText();
+        String cedula = this.txtCedula1.getText();
+        String telefono = this.txtTelefono1.getText();
+        String rta = this.myCasino.registrarCliente(nombre, cedula, telefono);
         Ventana.imp(rta, "Mensaje");
         this.limpiarBotonesJug();
     }//GEN-LAST:event_btnRegistrar1ActionPerformed
@@ -384,9 +387,14 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjackActionPerformed
         // TODO add your handling code here:
-        Blackjack form1=new Blackjack(this,this.myCasino);
+        String validacion = this.myCasino.validarHayCrupier();
+        if (!validacion.isEmpty()) {
+            Ventana.imp(validacion, "Sistema");
+            return;
+        }
+        Blackjack form1 = new Blackjack(this, this.myCasino);
         form1.setVisible(true);
-        
+
     }//GEN-LAST:event_btnSeleccionBlackjackActionPerformed
 
     private void btnSeleccionPoker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionPoker1ActionPerformed
@@ -395,6 +403,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjack1ActionPerformed
         // TODO add your handling code here:
+        
+        Blackjack form1=new Blackjack(this,this.myCasino);
+        form1.modificarLblJug2();
+        form1.setVisible(true);
     }//GEN-LAST:event_btnSeleccionBlackjack1ActionPerformed
 
     /**
@@ -426,7 +438,7 @@ public class Principal extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-           
+
             public void run() {
                 new Principal(new Casino(Ventana.leerInt("Digite el valor de caja inicial del casino"), Ventana.leerInt("Digite el numero de barajas que tiene el casino"))).setVisible(true);
             }

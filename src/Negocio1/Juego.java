@@ -4,13 +4,15 @@
  */
 package Negocio1;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author saraj
  */
 public class Juego {
     private Jugador myJugador;
-    private Carta myCarta[]=new Carta[5];
+    private ArrayList <Carta> myCartas=new ArrayList<>();
     private int puntaje;
     private String nombre;
     
@@ -28,12 +30,12 @@ public class Juego {
         this.myJugador = myJugador;
     }
 
-    public Carta[] getMyCarta() {
-        return myCarta;
+    public ArrayList<Carta> getMyCartas() {
+        return myCartas;
     }
 
-    public void setMyCarta(Carta[] myCarta) {
-        this.myCarta = myCarta;
+    public void setMyCartas(ArrayList<Carta> myCarta) {
+        this.myCartas = myCarta;
     }
 
     public int getPuntaje() {
@@ -56,7 +58,7 @@ public class Juego {
 
     @Override
     public String toString() {
-        return "Juego " + "myJugador= " + myJugador + ", myCarta= " + myCarta + ", puntaje= " + puntaje + ", nombre= " + nombre;
+        return "Juego " + "myJugador= " + myJugador + ", puntaje= " + puntaje + ", nombre= " + nombre;
     }
     
 }

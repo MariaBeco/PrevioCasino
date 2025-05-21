@@ -51,6 +51,12 @@ public class Casino {
             this.myBarajas.add(new Baraja(i));
         }
     }
+    public String validarHayCrupier(){
+        if(this.myCrupiers==null||this.myCrupiers.isEmpty()){
+            return "No se puede iniciar sin crupier.";
+        }
+        return "";
+    }
     public boolean validarCedulaCrupier(String cedula) {
         boolean registrado = false;
 
@@ -102,6 +108,7 @@ public class Casino {
         int jugador2 = this.buscarIndiceJugador(cedula2);/*index jug2*/
         this.myJugadores.get(jugador2).setApuesta(apuesta2);
         
+        
         int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
         int numJug2 = this.contarPartidaJugador(this.myJugadores.get(jugador2), fecha);
 
@@ -115,8 +122,8 @@ public class Casino {
         int numPartida = this.numPartidaDosJugadores(this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
         String nombre = "Blackjack";
 
-        this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0)));
-        PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0));
+        this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0),myCrupiers.get(0)));
+        PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0),myCrupiers.get(0));
 
         int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
@@ -130,7 +137,7 @@ public class Casino {
 
     public String[] StartBlackjackUno(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha){
         String cad[] = new String[1];
-        if (this.myJugadores == null && this.myCrupiers==null) {
+        if (this.myJugadores == null) {
             cad[0] = "No hay jugadores";
             return cad;
         }
@@ -146,16 +153,28 @@ public class Casino {
         int jugador1 = this.buscarIndiceJugador(cedula1);/*index jug 1*/
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
         int crupier = this.buscarIndiceCrupier(cedula2);/*index jug2*/
-        this.myJugadores.get(crupier).setApuesta(apuesta2);
+        this.myCrupiers.get(crupier).setApuesta(apuesta2);
         
         int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
         if(numJug1>11){
              cad[0] = "No se puede iniciar la partida porque el jugador lleva 10 partidas";
         }
         
+        int numPartida=this.myPartidosB.size();
         this.myJugadores.get(jugador1).setNumJugadaDia(numJug1);
         
         String nombre = "Blackjack";
+        Jugador jugNull=null;
+        this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida,jugNull, this.myBarajas.get(0), this.myCrupiers.get(crupier)));
+        PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, jugNull, this.myBarajas.get(0),this.myCrupiers.get(crupier));
+
+        int indexPartido = this.indexPartidoB(p);
+        cad = new String[5];
+        cad[0] = Integer.toString(numPartida+1);
+        String cartas[]=this.myPartidosB.get(indexPartido).enviarCartasInicio();
+          for(int i=1;i<5;i++){
+            cad[i]=cartas[i-1];
+        }
         return cad;
     }
     //index de un partido especifico de blackjack que esta en el arreglo 
@@ -190,37 +209,19 @@ public class Casino {
         int numPartida = 0;
         if (this.myPartidosB != null) {
             for (Partido p : this.myPartidosB) {
-                Juego ju[] = p.getMyJuego();
-                if (ju[0].getMyJugador().equals(jug1) && ju[1].getMyJugador().equals(jug2) && p.getFecha() == fecha) {
-                    numPartida++;
-                }
-            }
-        }
-        if (this.myPartidosP != null) {
-            for (Partido p : this.myPartidosP) {
-                Juego ju[] = p.getMyJuego();
-                if (ju[0].getMyJugador().equals(jug1) && ju[1].getMyJugador().equals(jug2) && p.getFecha() == fecha) {
+                if (p.getMyJuego(0).getMyJugador().equals(jug1) && p.getMyJuego(1).getMyJugador().equals(jug2) && p.getFecha() == fecha) {
                     numPartida++;
                 }
             }
         }
         return numPartida;
     }
-
-    public int contarPartidaJugador(Jugador obj, String fecha) {
+    
+    private int contarPartidaJugador(Jugador obj, String fecha) {
         int numPartida = 0;
         if (this.myPartidosB != null) {
             for (Partido p : this.myPartidosB) {
-                Juego ju[] = p.getMyJuego();
-                if (ju[0].getMyJugador().equals(obj) || ju[1].getMyJugador().equals(obj) && p.getFecha() == fecha) {
-                    numPartida++;
-                }
-            }
-        }
-        if (this.myPartidosP != null) {
-            for (Partido p : this.myPartidosP) {
-                Juego ju[] = p.getMyJuego();
-                if (ju[0].getMyJugador().equals(obj) || ju[1].getMyJugador().equals(obj) && p.getFecha() == fecha) {
+                if (p.getMyJuego(0).getMyJugador().equals(obj) || p.getMyJuego(1).getMyJugador().equals(obj) && p.getFecha() == fecha) {
                     numPartida++;
                 }
             }

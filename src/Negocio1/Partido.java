@@ -6,17 +6,19 @@ package Negocio1;
 
 public class Partido {
     private Juego myJuego[]=new Juego[2];
+    private Crupier myCrupier;
     private int numero;
     private String nombrePartida;
     private String fecha;
     private int pagoApuestas;
     private Baraja barajaUsada;
     
-    public Partido(String fecha, Jugador myJugador1, String nombrePartida,int numero, Jugador myJugador2,Baraja barajaU) {
+    public Partido(String fecha, Jugador myJugador1, String nombrePartida,int numero, Jugador myJugador2,Baraja barajaU,Crupier myCrupier) {
         this.fecha = fecha;
         this.barajaUsada=barajaU;
         this.nombrePartida=nombrePartida;
         this.numero=numero;
+        this.myCrupier=myCrupier;
         this.crearJuegoDosJugadores(myJugador1,  nombrePartida, myJugador2);
     }
     
@@ -29,6 +31,14 @@ public class Partido {
          this.barajaUsada.barajarCartas(barajaUsada);
          return this.barajaUsada.getMyCartas().getFirst().toString(); 
      }
+
+    public Crupier getMyCrupier() {
+        return myCrupier;
+    }
+
+    public void setMyCrupier(Crupier myCrupier) {
+        this.myCrupier = myCrupier;
+    }
      
     public String getNombrePartida() {
         return nombrePartida;
@@ -46,12 +56,16 @@ public class Partido {
         this.barajaUsada = barajaUsada;
     }
      
-    public Juego[] getMyJuego() {
-        return myJuego;
+    public Juego getMyJuego(int index) {
+        return myJuego[index];
     }
 
     public void setMyJuego(Juego[] myJuego) {
         this.myJuego = myJuego;
+    }
+
+    public Juego[] getMyJuego() {
+        return myJuego;
     }
 
     public int getNumero() {

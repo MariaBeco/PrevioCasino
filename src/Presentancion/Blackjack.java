@@ -611,7 +611,12 @@ public class Blackjack extends javax.swing.JFrame {
          }
            
     }//GEN-LAST:event_btnStartActionPerformed
-
+   
+    public void modificarLblJug2(){
+        this.lblJ2.setText("CRUPIER");
+        this.lblJ1.setText("JUGADOR"); 
+    }
+    
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOtra1ActionPerformed

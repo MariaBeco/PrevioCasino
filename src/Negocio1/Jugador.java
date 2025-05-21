@@ -9,7 +9,6 @@ package Negocio1;
  * @author saraj
  */
 public class Jugador extends Persona  {
-    private int apuesta;
     private int numJugadasDia=0;
     private String telefono;
     public Jugador() {

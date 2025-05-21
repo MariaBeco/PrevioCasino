@@ -9,40 +9,38 @@ package Negocio1;
  * @author saraj
  */
 public class PartidoBlackjack extends Partido {
+
     private Jugador myGanador;
     private int puntajeGanador;
 
-    
-    public PartidoBlackjack( String fecha, Jugador myJugador1, String nombrePartida, int numP, Jugador myJugador2,Baraja barajaU) {
-        super( fecha, myJugador1, nombrePartida, numP,myJugador2,barajaU);
-       
+    public PartidoBlackjack(String fecha, Jugador myJugador1, String nombrePartida, int numP, Jugador myJugador2, Baraja barajaU, Crupier myCrupier) {
+        super(fecha, myJugador1, nombrePartida, numP, myJugador2, barajaU, myCrupier);
+
     }
-    
-    
-    public String[] enviarCartasInicio(){
+
+    public String[] enviarCartasInicio() {
         super.getBarajaUsada().barajarCartas(super.getBarajaUsada());
-        String []cartasIniciales=new String[4];
-        int cartasSeleccionadas=0;
-        int asignarCarta=0;
-        Juego [] juego=super.getMyJuego();
-        Carta [] cartaInicialJug1=new Carta[2];
-        Carta [] cartaInicialJug2=new Carta[2];
-      for(Carta c:super.getBarajaUsada().getMyCartas()){
-          if(!c.isOcupada()){
-             cartasIniciales[cartasSeleccionadas]=c.toString();
-             c.setOcupada(true);
-             cartasSeleccionadas++;
-          }  
-            if(cartasSeleccionadas==4){
-                    break;
-                }
-      }  
-   
-      //como asiganar el puntaje a ese partido en especifico sin tener que recorrer el arreglo
-       return cartasIniciales;
+        String[] cartasIniciales = new String[4];
+        int cartasSeleccionadas = 0;
+        int asignarCarta = 0;
+        Carta[] cartaInicialJug1 = new Carta[2];
+        Carta[] cartaInicialJug2 = new Carta[2];
+        for (Carta c : super.getBarajaUsada().getMyCartas()) {
+            if (!c.isOcupada()) {
+                cartasIniciales[cartasSeleccionadas] = c.toString();
+                c.setOcupada(true);
+                cartasSeleccionadas++;
+            }
+            if (cartasSeleccionadas == 4) {
+                break;
+            }
+        }
+
+        //como asiganar el puntaje a ese partido en especifico sin tener que recorrer el arreglo
+        return cartasIniciales;
     }
-    
-    
+
+    /*
     public String hayBlackjack(){
         Juego [] juego= super.getMyJuego();
         int puntaje=0;
@@ -58,56 +56,56 @@ public class PartidoBlackjack extends Partido {
         if(puntaje==21)cad="¡Hay BlackJack!";
         else cad="No hay BlackJack,¡Sigue jugando!:D";
         return cad;
+    }*/
+    public String hayBlackjack(Juego[] juego) {
+        String cad = "";
+        int puntaje1 = this.getMyJuego(0).getPuntaje();
+        int puntaje2 = this.getMyJuego(1).getPuntaje();
+        if (puntaje1 == 21 && puntaje2 == 21) {
+            cad = "Ha ocurrido un empate";
+        } else if (puntaje1 == 21) {
+            cad = "¡ Jugador " + juego[0].getMyJugador().getNombre() + "hizo BlackJack!";
+            this.myGanador = juego[0].getMyJugador();
+            this.puntajeGanador = juego[0].getPuntaje();
+            //valor de la apuesta ganada
+        } else if (puntaje2 == 21) {
+            cad = "¡ Jugador " + juego[1].getMyJugador().getNombre() + "hizo BlackJack!";
+            this.myGanador = juego[1].getMyJugador();
+            this.puntajeGanador = juego[1].getPuntaje();
+            //valor de la apuesta ganada
+        } else {
+            cad = "No hay BlackJack,¡Sigue jugador 1! :D";
+        }
+        return cad;
     }
-     public String hayBlackjack(Juego[] juego){
-         String cad="";
-         Juego myJug[]=super.getMyJuego();
-         Carta[] myCarta1=myJug[0].getMyCarta();
-         Carta[]myCarta2=myJug[1].getMyCarta();
-         int puntaje1=this.Puntaje(myCarta1);
-         int puntaje2=this.Puntaje(myCarta2);
-         if(puntaje1==21&&puntaje2==21){
-             cad="Ha ocurrido un empate";
-         }else if(puntaje1==21){
-             cad="¡ Jugador "+juego[0].getMyJugador().getNombre()+"hizo BlackJack!";
-             this.myGanador=juego[0].getMyJugador();
-             this.puntajeGanador=juego[0].getPuntaje();
-             //valor de la apuesta ganada
-         }else if(puntaje2==21){
-             cad="¡ Jugador "+juego[1].getMyJugador().getNombre()+"hizo BlackJack!";
-             this.myGanador=juego[1].getMyJugador();
-             this.puntajeGanador=juego[1].getPuntaje();
-             //valor de la apuesta ganada
-         }else {
-             cad="No hay BlackJack,¡Sigue jugando!:D";
-         }
-     return cad;
-     }
     
-    public boolean esValorAs(Carta cart){
- 
-        boolean esA=false;
-        if(cart.getValor()==11)esA=true;
+    public String otraCarta(){
+        //inhabilitar botones del jugador dos
+        return"";
+    }
+    public boolean esValorAs(Carta cart) {
+
+        boolean esA = false;
+        if (cart.getValor() == 11) {
+            esA = true;
+        }
         return esA;
     }
-    
-    public int Puntaje(Carta []myCartas){
-        int puntaje=0;
-        int contAs=0; 
-        Carta [] cartas=myCartas;
-        for(int i=0;i<5;i++){
-            if(cartas[i]!=null){
-                if(this.esValorAs(cartas[i])==true&&contAs<1){
+
+    public int Puntaje(Carta mycarta,int index) {
+        int puntaje = 0;
+        int contAs = 0;
+        for(Carta c:super.getMyJuego(index).getMyCartas()){
+            if (this.esValorAs(c) == true && contAs == 0) {
                 contAs++;
-            }else if(this.esValorAs(cartas[i])==true&&contAs>1){
-                cartas[i].setValor(1);
+            } else if (this.esValorAs(c) == true && contAs > 1) {
+                mycarta.setValor(1);
                 contAs++;
             }
-            puntaje += cartas[i].getValor();
-            }
+            puntaje += mycarta.getValor();
         }
 
-        return puntaje;  
+        return puntaje;
     }
     //inicio juego que devuelve cuatro cartas
 }

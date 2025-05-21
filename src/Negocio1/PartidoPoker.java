@@ -9,8 +9,8 @@ package Negocio1;
  * @author saraj
  */
 public class PartidoPoker extends Partido{
-    public PartidoPoker( String fecha, Jugador myJugador1, String nombrePartida, int numP, Jugador myJugador2,Baraja barajaU) {
-        super( fecha, myJugador1, nombrePartida, numP,myJugador2,barajaU);
+    public PartidoPoker( String fecha, Jugador myJugador1, String nombrePartida, int numP, Jugador myJugador2,Baraja barajaU,Crupier myCrupier ) {
+        super( fecha, myJugador1, nombrePartida, numP,myJugador2,barajaU,myCrupier);
        
     }
     
@@ -29,7 +29,7 @@ public class PartidoPoker extends Partido{
         Juego [] juego= super.getMyJuego();
         String cad="";
         int contAs=0;
-        
+        /*
         for(int i=0;i<5;i++){
             Carta [] cartas=juego[i].getMyCarta();
             cartas[i].setValor(this.reasignarValores(cartas[i]));
@@ -40,7 +40,7 @@ public class PartidoPoker extends Partido{
                 cartas[i].setValor(1);
             }
              
-        }
+        }*/
         
         return "";
     }
