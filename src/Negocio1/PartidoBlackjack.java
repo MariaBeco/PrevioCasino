@@ -107,5 +107,5 @@ public class PartidoBlackjack extends Partido {
 
         return puntaje;
     }
-    //inicio juego que devuelve cuatro cartas
-}
+    //inicio juego que devuelve cuatro cartas   
+} 

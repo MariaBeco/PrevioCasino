@@ -615,12 +615,17 @@ public class Blackjack extends javax.swing.JFrame {
          String fecha=this.lblFecha.getText();
          
         String [] cartas=this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
+        if(cartas.length==1){
+            Ventana.imp(cartas[0], "Sistema");
+        }
         JLabel cartasEtiqueda[] = {this.lblNumeroPartido,this.lblC1J1,this.lblC2J1,this.lblC1J2,this.lblC2J2 };
         this.etiquetas=cartasEtiqueda;
         for(int i=0;i<cartasEtiqueda.length;i++){
                 cartasEtiqueda[i].setText(cartas[i]);
          }
-           
+        
+        String puntosJu1="";
+        String puntosJug2="";          
     }//GEN-LAST:event_btnStartActionPerformed
    
     public void modificarLblJug2(){
