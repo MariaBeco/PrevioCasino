@@ -37,15 +37,8 @@ public class PartidoBlackjack extends Partido {
                     break;
                 }
       }  
-  
-      /*for(Carta c:super.getBarajaUsada().getMyCartas()){
-                    for(int l=2;l<4;l++){
-                         for(int i=0; i<2;i++){
-                         cartaInicialJug1[i]=c;
-                           }
-                    cartaInicialJug2[l]=c;
-                     }
-           }*/
+   
+      //como asiganar el puntaje a ese partido en especifico sin tener que recorrer el arreglo
        return cartasIniciales;
     }
     
@@ -77,7 +70,16 @@ public class PartidoBlackjack extends Partido {
              cad="Ha ocurrido un empate";
          }else if(puntaje1==21){
              cad="¡ Jugador "+juego[0].getMyJugador().getNombre()+"hizo BlackJack!";
-             
+             this.myGanador=juego[0].getMyJugador();
+             this.puntajeGanador=juego[0].getPuntaje();
+             //valor de la apuesta ganada
+         }else if(puntaje2==21){
+             cad="¡ Jugador "+juego[1].getMyJugador().getNombre()+"hizo BlackJack!";
+             this.myGanador=juego[1].getMyJugador();
+             this.puntajeGanador=juego[1].getPuntaje();
+             //valor de la apuesta ganada
+         }else {
+             cad="No hay BlackJack,¡Sigue jugando!:D";
          }
      return cad;
      }

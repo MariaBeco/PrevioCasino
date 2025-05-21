@@ -20,13 +20,6 @@ public class Jugador extends Persona  {
         this.telefono=telefeno;
     }
 
-    public int getApuesta() {
-        return apuesta;
-    }
-
-    public void setApuesta(int apuesta) {
-        this.apuesta = apuesta;
-    }
     public int getNumJugadaDia() {
         return numJugadasDia;
     }
@@ -36,7 +29,7 @@ public class Jugador extends Persona  {
     }
     @Override
     public String toString() {
-        return "Jugador " +super.toString()+ " apuesta= " + apuesta+" Número de jugadas al dia"+this.numJugadasDia;
+        return "Jugador " +super.toString()+" Número de jugadas al dia"+this.numJugadasDia;
     }
     
 }

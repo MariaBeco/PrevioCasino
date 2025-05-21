@@ -5,6 +5,7 @@
 package Negocio1;
 
 abstract public class Persona {
+    private int apuesta;
     private String nombre;
     private String cedula;
 
@@ -15,7 +16,15 @@ abstract public class Persona {
         this.nombre = nombre;
         this.cedula=cedula;
     }
+    
+    public int getApuesta() {
+        return apuesta;
+    }
 
+    public void setApuesta(int apuesta) {
+        this.apuesta = apuesta;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -34,7 +43,7 @@ abstract public class Persona {
 
     @Override
     public String toString() {
-        return  " nombre: " + this.nombre+", cedula: "+this.cedula;
+        return  " nombre: " + this.nombre+", cedula: "+this.cedula+ " apuesta: " + apuesta;
     }
     
 }

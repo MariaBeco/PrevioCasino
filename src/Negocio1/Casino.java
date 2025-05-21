@@ -12,7 +12,7 @@ public class Casino {
     private ArrayList<Crupier> myCrupiers;
     private ArrayList<Baraja> myBarajas;
     private int myCaja;
-    private int mySaldo;
+    //private int mySaldo;
     private int mySaldoPagadoPoker;
     private int mySaldoPagadoBlackjack;
     Scanner sc = new Scanner(System.in);
@@ -38,6 +38,19 @@ public class Casino {
         return "¡Registro exitoso!";
     }
 
+        public String registrarCliente(String nombre, String cedula, String telefeno) {
+        if (this.validarCedulaJugador(cedula) == true) {
+            return "La cedula ya fue registrada.";
+        }
+        this.myJugadores.add(new Jugador(nombre, cedula, telefeno));
+        return "¡Jugador registrado!";
+    }
+
+    private void crearBaraja(int num) {
+        for (int i = 0; i <num; i++) {
+            this.myBarajas.add(new Baraja(i));
+        }
+    }
     public boolean validarCedulaCrupier(String cedula) {
         boolean registrado = false;
 
@@ -62,21 +75,6 @@ public class Casino {
         return registrado;
     }
 
-    public String registrarCliente(String nombre, String cedula, String telefeno) {
-        if (this.validarCedulaJugador(cedula) == true) {
-            return "La cedula ya fue registrada.";
-        }
-        this.myJugadores.add(new Jugador(nombre, cedula, telefeno));
-        return "¡Jugador registrado!";
-    }
-
-    private void crearBaraja(int num) {
-        for (int i = 0; i <num; i++) {
-            this.myBarajas.add(new Baraja(i));
-        }
-    }
-
-
     /*blackjack si son dos jugadores*/
     public String[] startBlackjackDos(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha) {
         String cad[] = new String[1];
@@ -92,11 +90,18 @@ public class Casino {
             cad[0] = "Una de las apuestas no es valida.";
             return cad;
         }
+        
+        this.myCaja+=apuesta1+apuesta2;//nuevo
+        if(this.dineroNoSuficiente(myCaja)){
+            cad[0] = "No hay dinero suficiente en la caja para apostar";
+            return cad;
+        }
+        
         int jugador1 = this.buscarIndiceJugador(cedula1);/*index jug 1*/
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
         int jugador2 = this.buscarIndiceJugador(cedula2);/*index jug2*/
         this.myJugadores.get(jugador2).setApuesta(apuesta2);
-
+        
         int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
         int numJug2 = this.contarPartidaJugador(this.myJugadores.get(jugador2), fecha);
 
@@ -117,10 +122,59 @@ public class Casino {
         cad = new String[5];
         cad[0] = Integer.toString(numPartida+1);
         String cartas[]=this.myPartidosB.get(indexPartido).enviarCartasInicio();
+          for(int i=1;i<5;i++){
+            cad[i]=cartas[i-1];
+        }
         return cad;
     }
 
+    public String[] StartBlackjackUno(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha){
+        String cad[] = new String[1];
+        if (this.myJugadores == null && this.myCrupiers==null) {
+            cad[0] = "No hay jugadores";
+            return cad;
+        }
+        if (this.buscarCedula(cedula1) == null || this.buscarCedulaCrupier(cedula2) == null) {
+            cad[0] = "No hay un jugador registrado con alguna de esas cedulas.";
+            return cad;
+        }
+        if (this.validarApuesta(apuesta1) == false || this.validarApuestaCrupier(apuesta1,apuesta2) == false) {
+            cad[0] = "Una de las apuestas no es valida.";
+            return cad;
+        }
+        
+        int jugador1 = this.buscarIndiceJugador(cedula1);/*index jug 1*/
+        this.myJugadores.get(jugador1).setApuesta(apuesta1);
+        int crupier = this.buscarIndiceCrupier(cedula2);/*index jug2*/
+        this.myJugadores.get(crupier).setApuesta(apuesta2);
+        
+        int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
+        if(numJug1>11){
+             cad[0] = "No se puede iniciar la partida porque el jugador lleva 10 partidas";
+        }
+        
+        this.myJugadores.get(jugador1).setNumJugadaDia(numJug1);
+        
+        String nombre = "Blackjack";
+        return cad;
+    }
     //index de un partido especifico de blackjack que esta en el arreglo 
+    private boolean validarApuestaCrupier(int apuesta1,int apuesta2){
+        boolean validar=false;
+        if(apuesta2>=apuesta1){
+            validar=true;
+        }
+        return validar;
+    }
+    
+    private boolean dineroNoSuficiente(int caja){
+        boolean noSuficiente=false;
+        if(caja<=150000){
+            noSuficiente=true;
+        }
+        return noSuficiente;
+    }
+    
     private int indexPartidoB(PartidoBlackjack p) {
         int index = 0;
         for (PartidoBlackjack par : this.myPartidosB) {
@@ -187,10 +241,21 @@ public class Casino {
         for (Jugador e : this.myJugadores) {
             if (e.getCedula().equalsIgnoreCase(cedula));
             buscado = e;
+            break;
         }
         return buscado;
     }
-
+    
+    private Crupier buscarCedulaCrupier(String cedula) {
+        Crupier buscado = null;
+        for (Crupier e : this.myCrupiers) {
+            if (e.getCedula().equalsIgnoreCase(cedula));
+            buscado = e;
+            break;
+        }
+        return buscado;
+    }
+    
     private int buscarIndiceJugador(String cedula) {
         int buscado = 0;
         for (Jugador e : this.myJugadores) {
@@ -201,6 +266,18 @@ public class Casino {
         }
         return buscado;
     }
+    
+    private int buscarIndiceCrupier(String cedula) {
+        int buscado = 0;
+        for (Crupier e : this.myCrupiers) {
+            if (e.getCedula().equalsIgnoreCase(cedula)) {
+                buscado = this.myCrupiers.indexOf(e);
+                break;
+            }
+        }
+        return buscado;
+    }
+    
     public String haberBlackJack(){
         
         return"";
