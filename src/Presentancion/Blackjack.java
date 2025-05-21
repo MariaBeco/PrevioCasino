@@ -631,6 +631,7 @@ public class Blackjack extends javax.swing.JFrame {
         String [] cartas=this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
         if(cartas.length==1){
             Ventana.imp(cartas[0], "Sistema");
+            return;
         }
         JLabel cartasEtiqueda[] = {this.lblNumeroPartido,this.lblC1J1,this.lblC2J1,this.lblC1J2,this.lblC2J2 };
         this.etiquetas=cartasEtiqueda;
