@@ -290,7 +290,7 @@ public class Casino {
     }
     
     public String llamarPuntaje(Carta carta, int index){
-        int p=this.myPartidosB.getLast().Puntaje(carta, index);
-        return "Su puntaje es: "+p;
+       // int p=this.myPartidosB.getLast().Puntaje(carta, index);
+        return "Su puntaje es: ";
     }
 }
