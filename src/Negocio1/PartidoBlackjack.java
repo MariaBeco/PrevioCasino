@@ -40,38 +40,21 @@ public class PartidoBlackjack extends Partido {
         return cartasIniciales;
     }
 
-    /*
-    public String hayBlackjack(){
-        Juego [] juego= super.getMyJuego();
-        int puntaje=0;
-        String cad="";
-        int contAs=0;
-        for(int i=0;i<2;i++){
-            Carta [] cartas=juego[i].getMyCarta();
-            if(this.esValorAs(cartas[i])==true&&contAs>1){
-                cartas[i].setValor(1);         
-            }
-            puntaje += cartas[i].getValor();
-        }
-        if(puntaje==21)cad="¡Hay BlackJack!";
-        else cad="No hay BlackJack,¡Sigue jugando!:D";
-        return cad;
-    }*/
-    public String hayBlackjack(Juego[] juego) {
+    public String hayBlackjack() {
         String cad = "";
         int puntaje1 = this.getMyJuego(0).getPuntaje();
         int puntaje2 = this.getMyJuego(1).getPuntaje();
         if (puntaje1 == 21 && puntaje2 == 21) {
             cad = "Ha ocurrido un empate";
         } else if (puntaje1 == 21) {
-            cad = "¡ Jugador " + juego[0].getMyJugador().getNombre() + "hizo BlackJack!";
-            this.myGanador = juego[0].getMyJugador();
-            this.puntajeGanador = juego[0].getPuntaje();
+            cad = "¡ Jugador " + this.getMyJuego(0).getMyJugador().getNombre() + "hizo BlackJack!";
+            this.myGanador = this.getMyJuego(0).getMyJugador();
+            this.puntajeGanador = this.getMyJuego(0).getPuntaje();
             //valor de la apuesta ganada
         } else if (puntaje2 == 21) {
-            cad = "¡ Jugador " + juego[1].getMyJugador().getNombre() + "hizo BlackJack!";
-            this.myGanador = juego[1].getMyJugador();
-            this.puntajeGanador = juego[1].getPuntaje();
+            cad = "¡ Jugador " + this.getMyJuego(1).getMyJugador().getNombre() + "hizo BlackJack!";
+            this.myGanador = this.getMyJuego(1).getMyJugador();
+            this.puntajeGanador = this.getMyJuego(1).getPuntaje();
             //valor de la apuesta ganada
         } else {
             cad = "No hay BlackJack,¡Sigue jugador 1! :D";
@@ -83,7 +66,7 @@ public class PartidoBlackjack extends Partido {
         //inhabilitar botones del jugador dos
         return"";
     }
-    public boolean esValorAs(Carta cart) {
+    private boolean esValorAs(Carta cart) {
 
         boolean esA = false;
         if (cart.getValor() == 11) {
@@ -92,17 +75,17 @@ public class PartidoBlackjack extends Partido {
         return esA;
     }
 
-    public int Puntaje(Carta mycarta,int index) {
+    public int Puntaje(int index) {
         int puntaje = 0;
         int contAs = 0;
         for(Carta c:super.getMyJuego(index).getMyCartas()){
             if (this.esValorAs(c) == true && contAs == 0) {
                 contAs++;
             } else if (this.esValorAs(c) == true && contAs > 1) {
-                mycarta.setValor(1);
+                c.setValor(1);
                 contAs++;
             }
-            puntaje += mycarta.getValor();
+            puntaje += c.getValor();
         }
 
         return puntaje;

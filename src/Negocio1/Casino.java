@@ -280,7 +280,17 @@ public class Casino {
     }
     
     public String haberBlackJack(){
-        
-        return"";
+        String p=this.myPartidosB.getLast().hayBlackjack();
+        return p;
     } 
+    
+    public String llamarOtraCarta(){
+        String c=this.myPartidosB.getLast().otraCarta();
+        return c;
+    }
+    
+    public String llamarPuntaje(Carta carta, int index){
+        int p=this.myPartidosB.getLast().Puntaje(carta, index);
+        return "Su puntaje es: "+p;
+    }
 }

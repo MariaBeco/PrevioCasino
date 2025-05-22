@@ -585,7 +585,14 @@ public class Blackjack extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNombre1ActionPerformed
 
     private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+        int puntosJug2=Integer.parseInt(this.txtJug2.getText());
+        if(puntosJug2<17){
+            Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
+            return;
+        }
+        this.btnOtra2.setEnabled(false);
+        this.btnStop2.setEnabled(false);
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
@@ -594,6 +601,13 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
         // TODO add your handling code here:
+        int puntosJug1=Integer.parseInt(this.txtJug1.getText());
+        if(puntosJug1<17){
+            Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
+            return;
+        }
+        this.btnOtra1.setEnabled(false);
+        this.btnStop1.setEnabled(false);
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -625,7 +639,8 @@ public class Blackjack extends javax.swing.JFrame {
          }
         
         String puntosJu1="";
-        String puntosJug2="";          
+        String puntosJug2="";      
+        puntosJu1=this.myCasino.haberBlackJack();
     }//GEN-LAST:event_btnStartActionPerformed
    
     public void modificarLblJug2(){
