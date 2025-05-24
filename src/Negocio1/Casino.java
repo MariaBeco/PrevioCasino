@@ -29,7 +29,7 @@ public class Casino {
 
     public String registrarEmpleados(String nombre, String cedula) {
 
-        if (this.validarCedulaCrupier(cedula) == true) {
+        if (this.validarCedula(cedula) == true) {
             return "La cedula ya fue registrada.";
         }
 
@@ -39,13 +39,31 @@ public class Casino {
     }
 
         public String registrarCliente(String nombre, String cedula, String telefeno) {
-        if (this.validarCedulaJugador(cedula) == true) {
+        if (this.validarCedula(cedula) == true) {
             return "La cedula ya fue registrada.";
         }
         this.myJugadores.add(new Jugador(nombre, cedula, telefeno));
         return "¡Jugador registrado!";
     }
-
+        
+    public ArrayList<String> listadoJug(){
+        ArrayList<String> lista=new ArrayList<>();
+        for(Jugador jug:this.myJugadores){
+            lista.add(jug.getNombre()+"-"+jug.getCedula());
+            System.out.println(jug.getNombre()+"-"+jug.getCedula());
+        }
+        return lista;
+    }  
+    
+    public ArrayList<String> listadoCru(){
+        ArrayList<String> lista=new ArrayList<>();
+        for(Crupier cru:this.myCrupiers){
+            lista.add(cru.getNombre()+"-"+cru.getCedula());
+            System.out.println(cru.getNombre()+"-"+cru.getCedula());
+        }
+        return lista;
+    }  
+    
     private void crearBaraja(int num) {
         for (int i = 0; i <num; i++) {
             this.myBarajas.add(new Baraja(i));
@@ -53,11 +71,14 @@ public class Casino {
     }
     public String validarHayCrupier(){
         if(this.myCrupiers==null||this.myCrupiers.isEmpty()){
-            return "No se puede iniciar sin crupier.";
+            return "No se puede iniciar sin un crupier.";
+        }
+        if(this.myJugadores.isEmpty()){
+            return "No se puede iniciar sin un jugador.";
         }
         return "";
     }
-    public boolean validarCedulaCrupier(String cedula) {
+    public boolean validarCedula(String cedula) {
         boolean registrado = false;
 
         for (Crupier e : this.myCrupiers) {
@@ -66,12 +87,7 @@ public class Casino {
                 break;
             }
         }
-        return registrado;
-    }
-
-    public boolean validarCedulaJugador(String cedula) {
-        boolean registrado = false;
-
+        
         for (Jugador e : this.myJugadores) {
             if (e.getCedula().equalsIgnoreCase(cedula)) {
                 registrado = true;
@@ -145,15 +161,15 @@ public class Casino {
             cad[0] = "No hay un jugador registrado con alguna de esas cedulas.";
             return cad;
         }
-        if (this.validarApuesta(apuesta1) == false || this.validarApuestaCrupier(apuesta1,apuesta2) == false) {
-            cad[0] = "Una de las apuestas no es valida.";
+        if (this.validarApuesta(apuesta1) == false) {
+            cad[0] = "La apuesta no es valida.";
             return cad;
         }
         
         int jugador1 = this.buscarIndiceJugador(cedula1);/*index jug 1*/
         this.myJugadores.get(jugador1).setApuesta(apuesta1);
         int crupier = this.buscarIndiceCrupier(cedula2);/*index jug2*/
-        this.myCrupiers.get(crupier).setApuesta(apuesta2);
+        this.myCrupiers.get(crupier).setApuesta(apuesta1);
         
         int numJug1 = this.contarPartidaJugador(this.myJugadores.get(jugador1), fecha);
         if(numJug1>11){
@@ -178,13 +194,13 @@ public class Casino {
         return cad;
     }
     //index de un partido especifico de blackjack que esta en el arreglo 
-    private boolean validarApuestaCrupier(int apuesta1,int apuesta2){
+    /*private boolean validarApuestaCrupier(int apuesta1,int apuesta2){
         boolean validar=false;
         if(apuesta2>=apuesta1){
             validar=true;
         }
         return validar;
-    }
+    }*/
     
     private boolean dineroNoSuficiente(int caja){
         boolean noSuficiente=false;

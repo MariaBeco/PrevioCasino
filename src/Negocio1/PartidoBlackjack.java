@@ -64,6 +64,7 @@ public class PartidoBlackjack extends Partido {
     
     public String otraCarta(){
         //inhabilitar botones del jugador dos
+        
         return"";
     }
     private boolean esValorAs(Carta cart) {

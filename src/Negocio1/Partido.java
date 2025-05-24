@@ -26,12 +26,7 @@ public class Partido {
             this.myJuego[0]=new Juego(myJugador1, nombrePartida);
             this.myJuego[1]=new Juego(myJugador2, nombrePartida);
         }
-     
-     public String pedirOtraCarta(){
-         this.barajaUsada.barajarCartas(barajaUsada);
-         return this.barajaUsada.getMyCartas().getFirst().toString(); 
-     }
-
+ 
     public Crupier getMyCrupier() {
         return myCrupier;
     }

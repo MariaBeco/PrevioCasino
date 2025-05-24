@@ -8,6 +8,8 @@ import Negocio1.Casino;
 import java.time.LocalDate;
 import javax.swing.JLabel;
 import Presentacion.Ventana;
+import java.util.ArrayList;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -29,6 +31,16 @@ public class Blackjack extends javax.swing.JFrame {
         LocalDate dt = LocalDate.now();
         this.lblFecha.setText(dt.toString());
         this.myPrincipal.getMyCasino();
+
+        ArrayList<String> jugadores = this.myCasino.listadoJug();
+
+        for (String jug : jugadores) {
+            this.cmbJug1.addItem(jug);
+            this.cmbJug2.addItem(jug);
+        }
+
+        //this.cmbJug1.addActionListener(evento -> jug1Seleccionado());
+        //this.cmbJug2.addActionListener(evento -> jug2Seleccionado());
     }
 
     public Principal getMyPrincipal() {
@@ -45,39 +57,32 @@ public class Blackjack extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnOtra = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
         lblNumeroPartido = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lblFecha = new javax.swing.JLabel();
         btnOtra1 = new javax.swing.JButton();
         btnStop1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtJug2 = new javax.swing.JTextArea();
+        txtJugadores = new javax.swing.JTextArea();
         btnNuevo = new javax.swing.JButton();
         btnStart = new javax.swing.JButton();
-        btnEvaluar = new javax.swing.JButton();
         btnSaldo = new javax.swing.JButton();
         btnOtra2 = new javax.swing.JButton();
         btnStop2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        txtJug1 = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panelJug2 = new javax.swing.JPanel();
         lblJapuesta2 = new javax.swing.JLabel();
         lblJnombre2 = new javax.swing.JLabel();
-        txtNombre2 = new javax.swing.JTextField();
         txtApuesta2 = new javax.swing.JTextField();
         lblJ2 = new javax.swing.JLabel();
-        lblJnombre3 = new javax.swing.JLabel();
-        txtCedula2 = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        cmbJug2 = new javax.swing.JComboBox<>();
+        panelJug1 = new javax.swing.JPanel();
         lblJapuesta1 = new javax.swing.JLabel();
         lblJnombre1 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
         txtApuesta1 = new javax.swing.JTextField();
         lblJ1 = new javax.swing.JLabel();
-        lblJapuesta3 = new javax.swing.JLabel();
-        txtCedula1 = new javax.swing.JTextField();
+        cmbJug1 = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         lblC1J1 = new javax.swing.JLabel();
         lblC2J1 = new javax.swing.JLabel();
@@ -89,6 +94,12 @@ public class Blackjack extends javax.swing.JFrame {
         lblC1J2 = new javax.swing.JLabel();
         lblC2J2 = new javax.swing.JLabel();
         lblC3J2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        lblPuntaje1 = new javax.swing.JLabel();
+        lblPuntaje2 = new javax.swing.JLabel();
+        lblPuntaje = new javax.swing.JLabel();
+        lblPuntJug1 = new javax.swing.JLabel();
+        lblPuntJug2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -103,8 +114,8 @@ public class Blackjack extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        btnOtra.setBackground(new java.awt.Color(51, 153, 0));
-        btnOtra.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 4));
+        panelPrincipal.setBackground(new java.awt.Color(51, 153, 0));
+        panelPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 4));
 
         lblNumeroPartido.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblNumeroPartido.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,9 +147,9 @@ public class Blackjack extends javax.swing.JFrame {
             }
         });
 
-        txtJug2.setColumns(20);
-        txtJug2.setRows(5);
-        jScrollPane1.setViewportView(txtJug2);
+        txtJugadores.setColumns(20);
+        txtJugadores.setRows(5);
+        jScrollPane1.setViewportView(txtJugadores);
 
         btnNuevo.setBackground(new java.awt.Color(204, 204, 0));
         btnNuevo.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
@@ -158,11 +169,6 @@ public class Blackjack extends javax.swing.JFrame {
                 btnStartActionPerformed(evt);
             }
         });
-
-        btnEvaluar.setBackground(new java.awt.Color(204, 204, 0));
-        btnEvaluar.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
-        btnEvaluar.setForeground(new java.awt.Color(255, 255, 255));
-        btnEvaluar.setText("Evaluar");
 
         btnSaldo.setBackground(new java.awt.Color(204, 204, 0));
         btnSaldo.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
@@ -192,14 +198,10 @@ public class Blackjack extends javax.swing.JFrame {
             }
         });
 
-        txtJug1.setColumns(20);
-        txtJug1.setRows(5);
-        jScrollPane2.setViewportView(txtJug1);
-
         jLabel14.setText("jLabel12");
 
-        jPanel1.setBackground(new java.awt.Color(153, 204, 0));
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
+        panelJug2.setBackground(new java.awt.Color(153, 204, 0));
+        panelJug2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
         lblJapuesta2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJapuesta2.setForeground(new java.awt.Color(255, 255, 255));
@@ -207,13 +209,7 @@ public class Blackjack extends javax.swing.JFrame {
 
         lblJnombre2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJnombre2.setForeground(new java.awt.Color(255, 255, 255));
-        lblJnombre2.setText("NOMBRE");
-
-        txtNombre2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre2ActionPerformed(evt);
-            }
-        });
+        lblJnombre2.setText("USUARIO");
 
         txtApuesta2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -225,61 +221,53 @@ public class Blackjack extends javax.swing.JFrame {
         lblJ2.setForeground(new java.awt.Color(255, 255, 255));
         lblJ2.setText("JUGADOR 2");
 
-        lblJnombre3.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
-        lblJnombre3.setForeground(new java.awt.Color(255, 255, 255));
-        lblJnombre3.setText("CEDULA*");
-
-        txtCedula2.addActionListener(new java.awt.event.ActionListener() {
+        cmbJug2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedula2ActionPerformed(evt);
+                cmbJug2ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelJug2Layout = new javax.swing.GroupLayout(panelJug2);
+        panelJug2.setLayout(panelJug2Layout);
+        panelJug2Layout.setHorizontalGroup(
+            panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelJug2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblJapuesta2)
-                        .addGap(15, 15, 15)
-                        .addComponent(txtApuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelJug2Layout.createSequentialGroup()
                         .addComponent(lblJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNombre2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblJnombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtCedula2)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelJug2Layout.createSequentialGroup()
+                        .addGroup(panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelJug2Layout.createSequentialGroup()
+                                .addComponent(lblJapuesta2)
+                                .addGap(15, 15, 15))
+                            .addGroup(panelJug2Layout.createSequentialGroup()
+                                .addComponent(lblJnombre2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbJug2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtApuesta2, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))))
                 .addGap(17, 17, 17))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(lblJ2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        panelJug2Layout.setVerticalGroup(
+            panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelJug2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblJ2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtCedula2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJnombre3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblJnombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbJug2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(panelJug2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtApuesta2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblJapuesta2))
-                .addContainerGap())
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel3.setBackground(new java.awt.Color(153, 204, 0));
-        jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
+        panelJug1.setBackground(new java.awt.Color(153, 204, 0));
+        panelJug1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, new java.awt.Color(204, 204, 204), null, null));
 
         lblJapuesta1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJapuesta1.setForeground(new java.awt.Color(255, 255, 255));
@@ -287,18 +275,7 @@ public class Blackjack extends javax.swing.JFrame {
 
         lblJnombre1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
         lblJnombre1.setForeground(new java.awt.Color(255, 255, 255));
-        lblJnombre1.setText("NOMBRE");
-
-        txtNombre1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtNombre1MousePressed(evt);
-            }
-        });
-        txtNombre1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre1ActionPerformed(evt);
-            }
-        });
+        lblJnombre1.setText("USUARIO");
 
         txtApuesta1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,63 +287,48 @@ public class Blackjack extends javax.swing.JFrame {
         lblJ1.setForeground(new java.awt.Color(255, 255, 255));
         lblJ1.setText("JUGADOR 1");
 
-        lblJapuesta3.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 14)); // NOI18N
-        lblJapuesta3.setForeground(new java.awt.Color(255, 255, 255));
-        lblJapuesta3.setText("CEDULA*");
-
-        txtCedula1.addActionListener(new java.awt.event.ActionListener() {
+        cmbJug1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCedula1ActionPerformed(evt);
+                cmbJug1ActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(22, 22, 22))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                    .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(24, 24, 24)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(lblJapuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtCedula1)
-                            .addComponent(txtApuesta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                            .addComponent(txtNombre1, javax.swing.GroupLayout.Alignment.LEADING))
+        javax.swing.GroupLayout panelJug1Layout = new javax.swing.GroupLayout(panelJug1);
+        panelJug1.setLayout(panelJug1Layout);
+        panelJug1Layout.setHorizontalGroup(
+            panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelJug1Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelJug1Layout.createSequentialGroup()
+                        .addGroup(panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelJug1Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblJnombre1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtApuesta1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                            .addComponent(cmbJug1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(17, 17, 17))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
+                    .addGroup(panelJug1Layout.createSequentialGroup()
                         .addComponent(lblJ1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+        panelJug1Layout.setVerticalGroup(
+            panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelJug1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
                 .addComponent(lblJ1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCedula1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJapuesta3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblJnombre1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbJug1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtApuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                .addGroup(panelJug1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblJapuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtApuesta1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.black, null, null));
@@ -387,9 +349,65 @@ public class Blackjack extends javax.swing.JFrame {
 
         lblC1J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
+        lblC2J2.setAlignmentX(0.5F);
         lblC2J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
 
         lblC3J2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(224, 101, 61)));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblPuntaje1.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
+        lblPuntaje1.setText("0");
+
+        lblPuntaje2.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
+        lblPuntaje2.setText("0");
+
+        lblPuntaje.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
+        lblPuntaje.setText("PUNTAJE");
+
+        lblPuntJug1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
+        lblPuntJug1.setText("JUG 1");
+
+        lblPuntJug2.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
+        lblPuntJug2.setText("JUG 2");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(lblPuntJug1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                        .addComponent(lblPuntJug2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblPuntaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblPuntaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblPuntaje)
+                .addGap(77, 77, 77))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(lblPuntaje)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPuntJug1)
+                    .addComponent(lblPuntJug2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPuntaje1)
+                    .addComponent(lblPuntaje2))
+                .addGap(42, 42, 42))
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -410,19 +428,21 @@ public class Blackjack extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(lblC4J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
-                        .addComponent(lblC5J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(lblC1J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(lblC2J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addComponent(lblC3J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(38, 38, 38))
+                        .addComponent(lblC3J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(lblC4J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(lblC5J2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -447,101 +467,87 @@ public class Blackjack extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblC4J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblC5J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(lblC5J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout btnOtraLayout = new javax.swing.GroupLayout(btnOtra);
-        btnOtra.setLayout(btnOtraLayout);
-        btnOtraLayout.setHorizontalGroup(
-            btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(btnOtraLayout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(btnOtraLayout.createSequentialGroup()
-                        .addGap(73, 73, 73)
-                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addComponent(lblNumeroPartido)
-                                .addGap(188, 188, 188)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(84, 84, 84)
-                                .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(btnOtraLayout.createSequentialGroup()
-                                .addGap(187, 187, 187)
-                                .addComponent(btnNuevo)
-                                .addGap(150, 150, 150))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnOtra1)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnStop1)
-                                .addGap(101, 101, 101)))
-                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnStart)
-                            .addComponent(btnEvaluar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                                .addComponent(btnSaldo)
-                                .addGap(113, 113, 113))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                                .addComponent(btnOtra2)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnStop2)
-                                .addGap(88, 88, 88)))))
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addGap(73, 73, 73)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(lblNumeroPartido)
+                        .addGap(188, 188, 188)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84)
+                        .addComponent(lblFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(panelJug1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addComponent(panelJug2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(btnOtra1)
+                .addGap(32, 32, 32)
+                .addComponent(btnStop1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(153, 153, 153)
+                .addComponent(btnOtra2)
+                .addGap(34, 34, 34)
+                .addComponent(btnStop2)
+                .addGap(123, 123, 123))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnNuevo)
+                        .addGap(53, 53, 53)
+                        .addComponent(btnSaldo)
+                        .addGap(109, 109, 109))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(302, 302, 302))
         );
-        btnOtraLayout.setVerticalGroup(
-            btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnOtraLayout.createSequentialGroup()
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFecha)
                     .addComponent(jLabel2)
                     .addComponent(lblNumeroPartido))
                 .addGap(18, 18, 18)
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelJug1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelJug2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnOtraLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnStop1)
-                                .addComponent(btnOtra1))
-                            .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnStop2)
-                                .addComponent(btnOtra2)))
-                        .addGap(18, 18, 18))
-                    .addGroup(btnOtraLayout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(btnStart)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(btnOtraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnOtra2)
+                            .addComponent(btnStop2)))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnOtra1)
+                            .addComponent(btnStop1))))
+                .addGap(28, 28, 28)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
-                    .addComponent(btnEvaluar)
                     .addComponent(btnSaldo))
-                .addGap(77, 77, 77))
+                .addGap(127, 127, 127))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -549,12 +555,12 @@ public class Blackjack extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnOtra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnOtra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -563,10 +569,6 @@ public class Blackjack extends javax.swing.JFrame {
     private void txtApuesta2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApuesta2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApuesta2ActionPerformed
-
-    private void txtNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre2ActionPerformed
 
     private void btnOtra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra2ActionPerformed
         // TODO add your handling code here:
@@ -580,14 +582,10 @@ public class Blackjack extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApuesta1ActionPerformed
 
-    private void txtNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre1ActionPerformed
-
     private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
         // TODO add your handling code here
-        int puntosJug2=Integer.parseInt(this.txtJug2.getText());
-        if(puntosJug2<17){
+        int puntosJug2 = Integer.parseInt(this.lblPuntaje2.getText());
+        if (puntosJug2 < 17) {
             Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
             return;
         }
@@ -601,90 +599,160 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
         // TODO add your handling code here:
-        int puntosJug1=Integer.parseInt(this.txtJug1.getText());
-        if(puntosJug1<17){
+        int puntosJug1 = Integer.parseInt(this.lblPuntaje1.getText());
+        if (puntosJug1 < 17) {
             Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
             return;
         }
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
+        this.btnOtra2.setEnabled(true);
+        this.btnStop2.setEnabled(true);
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        if(this.txtCedula1.getText().isEmpty()||this.txtCedula2.getText().isEmpty()||this.txtApuesta1.getText().isEmpty()||this.txtApuesta2.getText().isEmpty()){
-            Ventana.imp("¡Digite todos los campos!", "Sistema");
-        return;
+        if(this.cmbJug1.getSelectedItem().toString().equals(this.cmbJug2.getSelectedItem().toString())){
+           Ventana.imp("No puede jugar contra el mismo", "Sistema");
+           return;
         }
-        
-        if(this.myCasino.validarCedulaJugador(this.txtCedula1.getText())==false||this.myCasino.validarCedulaJugador(this.txtCedula2.getText())==false){
-            Ventana.imp("Alguna de las cedulas digitadas no fue registrada.", "Sistema");
+        if (this.txtApuesta1.getText().isEmpty() || this.txtApuesta2.getText().isEmpty()) {
+            Ventana.imp("¡Digite todos los campos!", "Sistema");
             return;
         }
-        
-        String cedula1=this.txtCedula1.getText();
-         String cedula2=this.txtCedula2.getText();
-         int apuesta1=Integer.parseInt(this.txtApuesta1.getText());
-         int apuesta2=Integer.parseInt(this.txtApuesta2.getText());
-         String fecha=this.lblFecha.getText();
-         
-        String [] cartas=this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
-        if(cartas.length==1){
+        this.btnOtra2.setEnabled(false);
+        this.btnStop2.setEnabled(false);
+        this.cmbJug1.enableInputMethods(false);
+        this.cmbJug2.enableInputMethods(false);
+
+        String dato1 = this.cmbJug1.getSelectedItem().toString();
+        String ced1[] = dato1.split("-");
+        String cedula1 = ced1[1];
+        String dato2 = this.cmbJug2.getSelectedItem().toString();
+        String ced2[] = dato2.split("-");
+        String cedula2 = ced1[1];
+
+        /*if(this.myCasino.validarCedulaJugador(cedula1)==false||this.myCasino.validarCedulaJugador(cedula2)==false){
+            Ventana.imp("Alguna de las cedulas digitadas no fue registrada.", "Sistema");
+            return;
+        }*/
+        int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
+        int apuesta2 = Integer.parseInt(this.txtApuesta2.getText());
+        String fecha = this.lblFecha.getText();
+
+        String[] cartas = this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
+        if (cartas.length == 1) {
             Ventana.imp(cartas[0], "Sistema");
             return;
         }
-        JLabel cartasEtiqueda[] = {this.lblNumeroPartido,this.lblC1J1,this.lblC2J1,this.lblC1J2,this.lblC2J2 };
-        this.etiquetas=cartasEtiqueda;
-        for(int i=0;i<cartasEtiqueda.length;i++){
-                cartasEtiqueda[i].setText(cartas[i]);
-         }
-        
-        String puntosJu1="";
-        String puntosJug2="";      
-        puntosJu1=this.myCasino.haberBlackJack();
+        JLabel cartasEtiqueda[] = {this.lblNumeroPartido, this.lblC1J1, this.lblC2J1, this.lblC1J2, this.lblC2J2};
+        this.etiquetas = cartasEtiqueda;
+        for (int i = 0; i < cartasEtiqueda.length; i++) {
+            cartasEtiqueda[i].setText(cartas[i]);
+        }
+
+        String puntosJu1 = "";
+        String puntosJug2 = "";
+        puntosJu1 = this.myCasino.haberBlackJack();
     }//GEN-LAST:event_btnStartActionPerformed
-   
-    public void modificarLblJug2(){
+
+    public void modificarLblJug2() {
         this.lblJ2.setText("CRUPIER");
-        this.lblJ1.setText("JUGADOR"); 
+        this.lblJ1.setText("JUGADOR");
+        this.lblPuntJug2.setText("CRUPIER");
+        this.txtApuesta2.setEnabled(false);
+        this.txtApuesta2.setText(this.txtApuesta1.getText());
     }
-    
+
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnOtra1ActionPerformed
 
-    private void txtNombre1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNombre1MousePressed
+    private void cmbJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJug1ActionPerformed
         // TODO add your handling code here:
-        this.txtNombre1.setText("");
-    }//GEN-LAST:event_txtNombre1MousePressed
+        //this.jug1Seleccionado();
 
-    private void txtCedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedula1ActionPerformed
+    }//GEN-LAST:event_cmbJug1ActionPerformed
+
+    private void cmbJug2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJug2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedula1ActionPerformed
+        //this.jug2Seleccionado();
+    }//GEN-LAST:event_cmbJug2ActionPerformed
 
-    private void txtCedula2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedula2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCedula2ActionPerformed
+    private void jug1Seleccionado() {
+        try {
+            String jug1 = this.cmbJug1.getSelectedItem().toString();
+            String jug2 = this.cmbJug2.getSelectedItem().toString();
+            ArrayList<String> jugadores = this.myCasino.listadoJug();
+            if (jug1.isEmpty()) {
+                jug1 = "";
+            }
+            if (jug2.isEmpty()) {
+                jug2 = "";
+            }
 
+            for (int i = 0; i < jugadores.size(); i++) {
+                if (jugadores.get(i).equalsIgnoreCase(jug1)) {
+                    this.cmbJug2.remove(i);
+                    this.cmbJug2.setEnabled(true);
+                    this.cmbJug1.setEditable(false);
+                }
+            }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
+    private void jug2Seleccionado() {
+        try {
+            String jug1 = this.cmbJug1.getSelectedItem().toString();
+            String jug2 = this.cmbJug2.getSelectedItem().toString();
+            ArrayList<String> jugadores = this.myCasino.listadoJug();
+
+            if (jug1.isEmpty()) {
+                jug1 = "";
+            }
+            if (jug2.isEmpty()) {
+                jug2 = "";
+            }
+
+            for (int i = 0; i < jugadores.size(); i++) {
+                if (jugadores.get(i).equalsIgnoreCase(jug2)) {
+                    this.cmbJug1.remove(i);
+                    this.cmbJug1.setEnabled(true);
+                    this.cmbJug2.setEditable(false);
+                }
+            }
+        }catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+
+    }
+
+    public JComboBox<String> getCmbJug2() {
+        return cmbJug2;
+    }
+
+    public void setCmbJug2(JComboBox<String> cmbJug2) {
+        this.cmbJug2 = cmbJug2;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEvaluar;
     private javax.swing.JButton btnNuevo;
-    private javax.swing.JPanel btnOtra;
     private javax.swing.JButton btnOtra1;
     private javax.swing.JButton btnOtra2;
     private javax.swing.JButton btnSaldo;
     private javax.swing.JButton btnStart;
     private javax.swing.JButton btnStop1;
     private javax.swing.JButton btnStop2;
+    private javax.swing.JComboBox<String> cmbJug1;
+    private javax.swing.JComboBox<String> cmbJug2;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblC1J1;
     private javax.swing.JLabel lblC1J2;
     private javax.swing.JLabel lblC2J1;
@@ -700,18 +768,19 @@ public class Blackjack extends javax.swing.JFrame {
     private javax.swing.JLabel lblJ2;
     private javax.swing.JLabel lblJapuesta1;
     private javax.swing.JLabel lblJapuesta2;
-    private javax.swing.JLabel lblJapuesta3;
     private javax.swing.JLabel lblJnombre1;
     private javax.swing.JLabel lblJnombre2;
-    private javax.swing.JLabel lblJnombre3;
     private javax.swing.JLabel lblNumeroPartido;
+    private javax.swing.JLabel lblPuntJug1;
+    private javax.swing.JLabel lblPuntJug2;
+    private javax.swing.JLabel lblPuntaje;
+    private javax.swing.JLabel lblPuntaje1;
+    private javax.swing.JLabel lblPuntaje2;
+    private javax.swing.JPanel panelJug1;
+    private javax.swing.JPanel panelJug2;
+    private javax.swing.JPanel panelPrincipal;
     private javax.swing.JTextField txtApuesta1;
     private javax.swing.JTextField txtApuesta2;
-    private javax.swing.JTextField txtCedula1;
-    private javax.swing.JTextField txtCedula2;
-    private javax.swing.JTextArea txtJug1;
-    private javax.swing.JTextArea txtJug2;
-    private javax.swing.JTextField txtNombre1;
-    private javax.swing.JTextField txtNombre2;
+    private javax.swing.JTextArea txtJugadores;
     // End of variables declaration//GEN-END:variables
 }

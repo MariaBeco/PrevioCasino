@@ -405,8 +405,11 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         Blackjack form1=new Blackjack(this,this.myCasino);
+        //form1.setCmbJug2(cmbJug2);
         form1.modificarLblJug2();
         form1.setVisible(true);
+        boolean escrupier=true;
+        
     }//GEN-LAST:event_btnSeleccionBlackjack1ActionPerformed
 
     /**
