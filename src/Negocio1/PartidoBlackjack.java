@@ -23,19 +23,22 @@ public class PartidoBlackjack extends Partido {
         String[] cartasIniciales = new String[4];
         int cartasSeleccionadas = 0;
         int asignarCarta = 0;
-        Carta[] cartaInicialJug1 = new Carta[2];
-        Carta[] cartaInicialJug2 = new Carta[2];
         for (Carta c : super.getBarajaUsada().getMyCartas()) {
             if (!c.isOcupada()) {
                 cartasIniciales[cartasSeleccionadas] = c.toString();
                 c.setOcupada(true);
                 cartasSeleccionadas++;
+                if(cartasSeleccionadas<=2){
+                    super.getMyJuego(0).setMyCartas(c);
+                }else{
+                   super.getMyJuego(1).setMyCartas(c); 
+                }
             }
             if (cartasSeleccionadas == 4) {
                 break;
             }
         }
-
+        
         //como asiganar el puntaje a ese partido en especifico sin tener que recorrer el arreglo
         return cartasIniciales;
     }
@@ -79,6 +82,7 @@ public class PartidoBlackjack extends Partido {
     public int Puntaje(int index) {
         int puntaje = 0;
         int contAs = 0;
+        System.out.println("error ");
         for(Carta c:super.getMyJuego(index).getMyCartas()){
             if (this.esValorAs(c) == true && contAs == 0) {
                 contAs++;
@@ -87,6 +91,7 @@ public class PartidoBlackjack extends Partido {
                 contAs++;
             }
             puntaje += c.getValor();
+            System.out.println("valor "+c.getValor());
         }
 
         return puntaje;

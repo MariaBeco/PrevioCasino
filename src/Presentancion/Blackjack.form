@@ -782,9 +782,9 @@
                               </Group>
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                                  <Component id="lblPuntaje1" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="lblPuntaje1Mod" min="-2" pref="34" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="lblPuntaje2" min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Component id="lblPuntaje2Mod" min="-2" pref="34" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -808,8 +808,8 @@
                           </Group>
                           <EmptySpace pref="7" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lblPuntaje1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblPuntaje2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPuntaje1Mod" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblPuntaje2Mod" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       </Group>
@@ -817,7 +817,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblPuntaje1">
+                <Component class="javax.swing.JLabel" name="lblPuntaje1Mod">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Palatino Linotype" size="18" style="0"/>
@@ -825,7 +825,7 @@
                     <Property name="text" type="java.lang.String" value="0"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblPuntaje2">
+                <Component class="javax.swing.JLabel" name="lblPuntaje2Mod">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Palatino Linotype" size="18" style="0"/>

@@ -20,6 +20,7 @@ public class Blackjack extends javax.swing.JFrame {
     private Principal myPrincipal;
     private Casino myCasino;
     private JLabel etiquetas[];
+    private boolean crupier;
 
     /**
      * Creates new form Blackjack
@@ -37,6 +38,29 @@ public class Blackjack extends javax.swing.JFrame {
         for (String jug : jugadores) {
             this.cmbJug1.addItem(jug);
             this.cmbJug2.addItem(jug);
+        }
+
+        //this.cmbJug1.addActionListener(evento -> jug1Seleccionado());
+        //this.cmbJug2.addActionListener(evento -> jug2Seleccionado());
+    }
+
+    public Blackjack(Principal myPrincipal, Casino myCasino, boolean crupier) {
+        initComponents();
+        this.myPrincipal = myPrincipal;
+        this.myCasino = myCasino;
+        LocalDate dt = LocalDate.now();
+        this.lblFecha.setText(dt.toString());
+        this.myPrincipal.getMyCasino();
+        this.crupier = true;
+
+        ArrayList<String> jugadores = this.myCasino.listadoJug();
+        ArrayList<String> crupiers = this.myCasino.listadoCru();
+
+        for (String jug : jugadores) {
+            this.cmbJug1.addItem(jug);
+        }
+        for (String cru : crupiers) {
+            this.cmbJug2.addItem(cru);
         }
 
         //this.cmbJug1.addActionListener(evento -> jug1Seleccionado());
@@ -95,8 +119,8 @@ public class Blackjack extends javax.swing.JFrame {
         lblC2J2 = new javax.swing.JLabel();
         lblC3J2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        lblPuntaje1 = new javax.swing.JLabel();
-        lblPuntaje2 = new javax.swing.JLabel();
+        lblPuntaje1Mod = new javax.swing.JLabel();
+        lblPuntaje2Mod = new javax.swing.JLabel();
         lblPuntaje = new javax.swing.JLabel();
         lblPuntJug1 = new javax.swing.JLabel();
         lblPuntJug2 = new javax.swing.JLabel();
@@ -356,11 +380,11 @@ public class Blackjack extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblPuntaje1.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
-        lblPuntaje1.setText("0");
+        lblPuntaje1Mod.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
+        lblPuntaje1Mod.setText("0");
 
-        lblPuntaje2.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
-        lblPuntaje2.setText("0");
+        lblPuntaje2Mod.setFont(new java.awt.Font("Palatino Linotype", 0, 18)); // NOI18N
+        lblPuntaje2Mod.setText("0");
 
         lblPuntaje.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
         lblPuntaje.setText("PUNTAJE");
@@ -384,9 +408,9 @@ public class Blackjack extends javax.swing.JFrame {
                         .addComponent(lblPuntJug2))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(lblPuntaje1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPuntaje1Mod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblPuntaje2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblPuntaje2Mod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -404,8 +428,8 @@ public class Blackjack extends javax.swing.JFrame {
                     .addComponent(lblPuntJug2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPuntaje1)
-                    .addComponent(lblPuntaje2))
+                    .addComponent(lblPuntaje1Mod)
+                    .addComponent(lblPuntaje2Mod))
                 .addGap(42, 42, 42))
         );
 
@@ -584,7 +608,7 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStop2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop2ActionPerformed
         // TODO add your handling code here
-        int puntosJug2 = Integer.parseInt(this.lblPuntaje2.getText());
+        int puntosJug2 = Integer.parseInt(this.lblPuntaje2Mod.getText());
         if (puntosJug2 < 17) {
             Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
             return;
@@ -599,23 +623,39 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
         // TODO add your handling code here:
-        int puntosJug1 = Integer.parseInt(this.lblPuntaje1.getText());
+        int puntosJug1 = Integer.parseInt(this.lblPuntaje1Mod.getText());
         if (puntosJug1 < 17) {
             Ventana.imp("¡No puedes plantarte!, tus puntos no llegan a 17", "Sistema");
             return;
         }
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
-        this.btnOtra2.setEnabled(true);
-        this.btnStop2.setEnabled(true);
+        if (!this.crupier) {
+            this.btnOtra2.setEnabled(true);
+            this.btnStop2.setEnabled(true);
+        }
+
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
-        if(this.cmbJug1.getSelectedItem().toString().equals(this.cmbJug2.getSelectedItem().toString())){
-           Ventana.imp("No puede jugar contra el mismo", "Sistema");
-           return;
+        if (this.cmbJug1.getSelectedItem().toString().equals(this.cmbJug2.getSelectedItem().toString())) {
+            Ventana.imp("No puede jugar contra el mismo", "Sistema");
+            return;
         }
+        if (this.crupier) {
+           this.startCrupier();   
+        }
+        if(!this.crupier){
+            this.startJugador();
+        }
+        
+        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
+        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+        this.txtJugadores.setText(this.myCasino.haberBlackJack());
+    }//GEN-LAST:event_btnStartActionPerformed
+    
+    private void startJugador(){
         if (this.txtApuesta1.getText().isEmpty() || this.txtApuesta2.getText().isEmpty()) {
             Ventana.imp("¡Digite todos los campos!", "Sistema");
             return;
@@ -632,36 +672,76 @@ public class Blackjack extends javax.swing.JFrame {
         String ced2[] = dato2.split("-");
         String cedula2 = ced1[1];
 
-        /*if(this.myCasino.validarCedulaJugador(cedula1)==false||this.myCasino.validarCedulaJugador(cedula2)==false){
-            Ventana.imp("Alguna de las cedulas digitadas no fue registrada.", "Sistema");
-            return;
-        }*/
         int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
         int apuesta2 = Integer.parseInt(this.txtApuesta2.getText());
+        
+        if(this.myCasino.dineroNoSuficiente()){
+             Ventana.imp("No hay dinero suficiente", "Sistema");        
+             while(this.myCasino.getMyCaja()<150000){
+                 int cajaAgregar=Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
+                 this.myCasino.setMyCaja(this.myCasino.getMyCaja()+cajaAgregar);
+             }
+        }
+        
         String fecha = this.lblFecha.getText();
 
         String[] cartas = this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
         if (cartas.length == 1) {
             Ventana.imp(cartas[0], "Sistema");
-            return;
+            return;   
         }
         JLabel cartasEtiqueda[] = {this.lblNumeroPartido, this.lblC1J1, this.lblC2J1, this.lblC1J2, this.lblC2J2};
         this.etiquetas = cartasEtiqueda;
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
+    }
+    
+    private void startCrupier(){
+        if (this.txtApuesta1.getText().isEmpty()) {
+                Ventana.imp("¡Digite todos los campos!", "Sistema");
+                return;
+            }
+            this.btnOtra2.setEnabled(false);
+            this.btnStop2.setEnabled(false);
+            
+        String dato1 = this.cmbJug1.getSelectedItem().toString();
+        String ced1[] = dato1.split("-");
+        String cedula1 = ced1[1];
+        String dato2 = this.cmbJug2.getSelectedItem().toString();
+        String ced2[] = dato2.split("-");
+        String cedula2 = ced1[1];
+        
+        int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
+        this.txtApuesta2.setText(this.txtApuesta1.getText());
+        int apuesta2 = apuesta1;
 
-        String puntosJu1 = "";
-        String puntosJug2 = "";
-        puntosJu1 = this.myCasino.haberBlackJack();
-    }//GEN-LAST:event_btnStartActionPerformed
-
+        if(this.myCasino.dineroNoSuficiente()){
+             Ventana.imp("No hay dinero suficiente", "Sistema");        
+             while(this.myCasino.getMyCaja()<150000){
+                 int cajaAgregar=Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
+                 this.myCasino.setMyCaja(this.myCasino.getMyCaja()+cajaAgregar);
+             }
+        }
+        
+        String fecha = this.lblFecha.getText();
+        String[] cartas = this.myCasino.StartBlackjackUno(apuesta1, apuesta2, cedula1, cedula2, fecha);
+        if (cartas.length == 1) {
+            Ventana.imp(cartas[0], "Sistema");
+            return;   
+        }
+        JLabel cartasEtiqueda[] = {this.lblNumeroPartido, this.lblC1J1, this.lblC2J1, this.lblC1J2, this.lblC2J2};
+        this.etiquetas = cartasEtiqueda;
+        for (int i = 0; i < cartasEtiqueda.length; i++) {
+            cartasEtiqueda[i].setText(cartas[i]);
+        }
+    }
     public void modificarLblJug2() {
         this.lblJ2.setText("CRUPIER");
         this.lblJ1.setText("JUGADOR");
         this.lblPuntJug2.setText("CRUPIER");
         this.txtApuesta2.setEnabled(false);
-        this.txtApuesta2.setText(this.txtApuesta1.getText());
+        this.txtApuesta2.setText("Igual a la otra apuesta");
     }
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
@@ -723,7 +803,7 @@ public class Blackjack extends javax.swing.JFrame {
                     this.cmbJug2.setEditable(false);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
@@ -774,8 +854,8 @@ public class Blackjack extends javax.swing.JFrame {
     private javax.swing.JLabel lblPuntJug1;
     private javax.swing.JLabel lblPuntJug2;
     private javax.swing.JLabel lblPuntaje;
-    private javax.swing.JLabel lblPuntaje1;
-    private javax.swing.JLabel lblPuntaje2;
+    private javax.swing.JLabel lblPuntaje1Mod;
+    private javax.swing.JLabel lblPuntaje2Mod;
     private javax.swing.JPanel panelJug1;
     private javax.swing.JPanel panelJug2;
     private javax.swing.JPanel panelPrincipal;

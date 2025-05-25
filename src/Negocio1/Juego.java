@@ -37,6 +37,10 @@ public class Juego {
     public void setMyCartas(ArrayList<Carta> myCarta) {
         this.myCartas = myCarta;
     }
+    
+    public void setMyCartas(Carta myCarta) {
+        this.myCartas.add(myCarta);
+    }
 
     public int getPuntaje() {
         return puntaje;

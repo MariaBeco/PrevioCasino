@@ -403,13 +403,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjack1ActionPerformed
         // TODO add your handling code here:
-        
-        Blackjack form1=new Blackjack(this,this.myCasino);
-        //form1.setCmbJug2(cmbJug2);
+        boolean crupier=true;
+        Blackjack form1=new Blackjack(this,this.myCasino,crupier);
         form1.modificarLblJug2();
         form1.setVisible(true);
-        boolean escrupier=true;
-        
     }//GEN-LAST:event_btnSeleccionBlackjack1ActionPerformed
 
     /**
