@@ -142,7 +142,7 @@ public class Casino {
 
         int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
-        cad[0] = Integer.toString(numPartida + 1);
+        cad[0] ="Partida No. "+(numPartida+1);
         String cartas[] = this.myPartidosB.get(indexPartido).enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
@@ -184,7 +184,7 @@ public class Casino {
 
         int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
-        cad[0] = Integer.toString(numPartida + 1);
+        cad[0] ="Partida No. "+(numPartida+1);
         String cartas[] = this.myPartidosB.get(indexPartido).enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
@@ -305,13 +305,36 @@ public class Casino {
         return puntaje1;
     }
 
-    public String llamarOtraCarta() {
-        String c = this.myPartidosB.getLast().otraCarta();
+    public String saldo(){
+        String saldoAct="";
+        if(this.myPartidosB.isEmpty()){
+        return "No hay partidos registrados";
+        }
+        
+        int cajaAntes=this.myCaja;
+        
+        saldoAct+="El casino tiene un saldo para pagar apuestas de "+cajaAntes;
+        
+        if(this.myPartidosB.getLast().getMyGanador()!=null){
+            int premio=this.myPartidosB.getLast().premiarJugBlackjack();
+            this.mySaldoPagadoBlackjack+=premio;
+            this.myCaja -= premio;
+            saldoAct+="\n !Ha habido un ganador¡ el saldo actualizado para pagar apuestas es "+this.myCaja;
+        }
+        
+        saldoAct+="\n Por apuestas Blackjack se ha pagado "+this.mySaldoPagadoBlackjack;
+        
+        return saldoAct;
+    }
+    public String llamarOtraCarta(int index) {
+        String c = this.myPartidosB.getLast().otraCartaJugador(index);
+        
         return c;
     }
-
-    public String llamarPuntaje(Carta carta, int index) {
-        // int p=this.myPartidosB.getLast().Puntaje(carta, index);
-        return "Su puntaje es: ";
+    
+    public boolean ganador(int index){
+        boolean ganador=this.myPartidosB.getLast().gano(index);
+        return ganador;
     }
+
 }

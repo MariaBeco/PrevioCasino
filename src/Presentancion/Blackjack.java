@@ -619,6 +619,8 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
         // TODO add your handling code here:
+        String informeSaldo=this.myCasino.saldo();
+        this.txtJugadores.setText(informeSaldo);
     }//GEN-LAST:event_btnSaldoActionPerformed
 
     private void btnStop1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStop1ActionPerformed
@@ -650,8 +652,7 @@ public class Blackjack extends javax.swing.JFrame {
         if(!this.crupier){
             this.startJugador();
         }
-        
-        
+    
     }//GEN-LAST:event_btnStartActionPerformed
     
     private void startJugador(){
@@ -751,6 +752,33 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
         // TODO add your handling code here:
+        String carta=this.myCasino.llamarOtraCarta(0);
+        
+        if(carta.equalsIgnoreCase("Perdio")){
+            Ventana.imp("Ha perdido, su puntaje es mayor de 21, sigue jugador 2", "Sistema");
+            this.btnOtra1.setEnabled(false);
+            this.btnStop1.setEnabled(false);
+            this.btnOtra2.setEnabled(true);
+            this.btnStop2.setEnabled(true);
+            return;
+        }
+        if(carta.equalsIgnoreCase("Solo5")){
+            Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+            this.btnOtra1.setEnabled(false);
+            this.btnStop1.setEnabled(false);
+            this.btnOtra2.setEnabled(true);
+            this.btnStop2.setEnabled(true);
+            return;
+        }
+
+        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
+        JLabel cartasEtiquetas[] = {this.lblC3J1, this.lblC4J1, this.lblC5J2};
+        for(JLabel l:cartasEtiquetas){
+            if(l.getText().isEmpty()){
+                l.setText(carta);
+                break;
+            } 
+        }
     }//GEN-LAST:event_btnOtra1ActionPerformed
 
     private void cmbJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJug1ActionPerformed
