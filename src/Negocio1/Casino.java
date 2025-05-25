@@ -134,7 +134,7 @@ public class Casino {
         this.myJugadores.get(jugador1).setNumJugadaDia(numJug1);
         this.myJugadores.get(jugador2).setNumJugadaDia(numJug2);
 
-        int numPartida = this.numPartidaDosJugadores(this.myJugadores.get(jugador1), this.myJugadores.get(jugador2), fecha);
+        int numPartida = this.myPartidosB.size();
         String nombre = "Blackjack";
 
         this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0), myCrupiers.get(0)));
@@ -220,7 +220,7 @@ public class Casino {
         return index;
     }
 
-    private int numPartidaDosJugadores(Jugador jug1, Jugador jug2, String fecha) {
+  /*  private int numPartidaDosJugadores(Jugador jug1, Jugador jug2, String fecha) {
         int numPartida = 0;
         if (this.myPartidosB != null) {
             for (Partido p : this.myPartidosB) {
@@ -230,7 +230,7 @@ public class Casino {
             }
         }
         return numPartida;
-    }
+    }*/
 
     private int contarPartidaJugador(Jugador obj, String fecha) {
         int numPartida = 0;

@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Negocio1;
-
 /**
  *
  * @author saraj
@@ -65,6 +64,43 @@ public class PartidoBlackjack extends Partido {
         return cad;
     }
     
+    public String hayBlackjackCrupier() {
+        String cad = "";
+        int gano;
+        int puntaje1 = this.getMyJuego(0).getPuntaje();
+        int puntaje2 = this.getMyJuego(1).getPuntaje();
+        if (puntaje1 == 21 && puntaje2 == 21) {
+            cad = "Ha ocurrido un empate";
+        } else if (puntaje1 == 21) {
+            gano=this.premiarJug();
+            cad = "¡ Jugador " + this.getMyJuego(0).getMyJugador().getNombre() + "hizo BlackJack!, ha ganado "+gano;
+            this.myGanador = this.getMyJuego(0).getMyJugador();
+            this.puntajeGanador = this.getMyJuego(0).getPuntaje();
+            //valor de la apuesta ganada
+        } else if (puntaje2 == 21) {
+            
+            cad = "¡ La casa ha ganado la partida!";
+            this.myGanador = this.getMyJuego(1).getMyJugador();
+            this.puntajeGanador = this.getMyJuego(1).getPuntaje();
+            //valor de la apuesta ganada
+        } else {
+            cad = "No hay BlackJack,¡Sigue jugador 1! :D";
+        }
+        return cad;
+    }
+    
+    public int premiarJug(){
+        int ganancia=super.getMyJuego(0).getMyJugador().getApuesta()+super.getMyJuego(1).getMyJugador().getApuesta();
+        ganancia*=3;
+        return ganancia;
+    }
+    
+    public int premiarCru(){
+         int ganancia=super.getMyJuego(0).getMyJugador().getApuesta()+super.getMyJuego(1).getMyJugador().getApuesta();
+         int bonificacion=ganancia*(15/100);
+         
+         return bonificacion;
+    }
     public String otraCarta(){
         //inhabilitar botones del jugador dos
         

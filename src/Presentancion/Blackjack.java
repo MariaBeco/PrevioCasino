@@ -645,14 +645,13 @@ public class Blackjack extends javax.swing.JFrame {
         }
         if (this.crupier) {
            this.startCrupier();   
+           
         }
         if(!this.crupier){
             this.startJugador();
         }
         
-        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
-        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-        this.txtJugadores.setText(this.myCasino.haberBlackJack());
+        
     }//GEN-LAST:event_btnStartActionPerformed
     
     private void startJugador(){
@@ -695,6 +694,9 @@ public class Blackjack extends javax.swing.JFrame {
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
+        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
+        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+        this.txtJugadores.setText(this.myCasino.haberBlackJack());
     }
     
     private void startCrupier(){
@@ -735,6 +737,9 @@ public class Blackjack extends javax.swing.JFrame {
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
+        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
+        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+        this.txtJugadores.setText(this.myCasino.haberBlackJack());
     }
     public void modificarLblJug2() {
         this.lblJ2.setText("CRUPIER");
