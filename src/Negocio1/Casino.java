@@ -16,15 +16,25 @@ public class Casino {
     private int mySaldoPagadoPoker;
     private int mySaldoPagadoBlackjack;
     Scanner sc = new Scanner(System.in);
+    private int myCajaInicial;
 
     //blackjack
     public Casino(int myCaja, int num) {
         this.myCaja = myCaja;
+        this.myCajaInicial=myCaja;
         this.myPartidosB = new ArrayList<>();
         this.myJugadores = new ArrayList<>();
         this.myCrupiers = new ArrayList<>();
         this.myBarajas = new ArrayList<>();
         this.crearBaraja(num);
+    }
+
+    public int getMySaldoPagadoBlackjack() {
+        return mySaldoPagadoBlackjack;
+    }
+    
+    public int getMyCajaInicial() {
+        return myCaja;
     }
 
     public int getMyCaja() {
@@ -143,7 +153,7 @@ public class Casino {
         int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
         cad[0] ="Partida No. "+(numPartida+1);
-        String cartas[] = this.myPartidosB.get(indexPartido).enviarCartasInicio();
+        String cartas[] = this.myPartidosB.getLast().enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
         }
@@ -185,7 +195,7 @@ public class Casino {
         int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
         cad[0] ="Partida No. "+(numPartida+1);
-        String cartas[] = this.myPartidosB.get(indexPartido).enviarCartasInicio();
+        String cartas[] = this.myPartidosB.getLast().enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
         }
@@ -301,7 +311,6 @@ public class Casino {
 
     public String mostrarPuntaje(int index) {
         String puntaje1 = Integer.toString(this.myPartidosB.getLast().Puntaje(index));
-        System.out.println("pun 1 "+puntaje1);
         return puntaje1;
     }
 
@@ -337,4 +346,30 @@ public class Casino {
         return ganador;
     }
 
+    public int llamarPagoJugB(int index){
+        int pago= this.myPartidosB.getLast().premiarJugBlackjack();
+        this.setMyCaja(this.myCaja- pago);
+        this.mySaldoPagadoBlackjack+=pago;
+        return pago;
+    }
+    
+    public int llamarPagoJug(int index){
+        int pago= this.myPartidosB.getLast().premiarGanado(index);
+        this.setMyCaja(this.myCaja- pago);
+        this.mySaldoPagadoBlackjack+=pago;
+        return pago;
+    }
+    
+    public int llamarPorcentajeCru(){
+        int porcentaje=this.myPartidosB.getLast().premiarCru();
+        return porcentaje;
+    }
+    
+    public boolean llamarPerdio(int index){
+        boolean perdio=false;
+        if(this.myPartidosB.getLast().perdio(index)){
+        perdio=true;
+        }
+        return perdio;
+    }
 }

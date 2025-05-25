@@ -173,12 +173,15 @@ public class Blackjack extends javax.swing.JFrame {
 
         txtJugadores.setColumns(20);
         txtJugadores.setRows(5);
+        txtJugadores.setEnabled(false);
         jScrollPane1.setViewportView(txtJugadores);
 
         btnNuevo.setBackground(new java.awt.Color(204, 204, 0));
         btnNuevo.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 18)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(255, 255, 255));
         btnNuevo.setText("Nuevo");
+        btnNuevo.setEnabled(false);
+        btnNuevo.setOpaque(true);
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoActionPerformed(evt);
@@ -516,28 +519,27 @@ public class Blackjack extends javax.swing.JFrame {
                         .addComponent(panelJug2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(btnOtra1)
-                .addGap(32, 32, 32)
-                .addComponent(btnStop1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(153, 153, 153)
-                .addComponent(btnOtra2)
-                .addGap(34, 34, 34)
-                .addComponent(btnStop2)
-                .addGap(123, 123, 123))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPrincipalLayout.createSequentialGroup()
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
                         .addComponent(btnNuevo)
-                        .addGap(53, 53, 53)
+                        .addGap(89, 89, 89)
                         .addComponent(btnSaldo)
-                        .addGap(109, 109, 109))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(302, 302, 302))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(btnOtra1)
+                        .addGap(32, 32, 32)
+                        .addComponent(btnStop1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(153, 153, 153)
+                        .addComponent(btnOtra2)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnStop2)
+                        .addGap(123, 123, 123))))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -566,12 +568,12 @@ public class Blackjack extends javax.swing.JFrame {
                             .addComponent(btnOtra1)
                             .addComponent(btnStop1))))
                 .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNuevo)
-                    .addComponent(btnSaldo))
-                .addGap(127, 127, 127))
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnNuevo)
+                        .addComponent(btnSaldo)))
+                .addGap(237, 237, 237))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -584,7 +586,7 @@ public class Blackjack extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 772, Short.MAX_VALUE)
         );
 
         pack();
@@ -596,12 +598,96 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnOtra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra2ActionPerformed
         // TODO add your handling code here:
+        if(!this.crupier){
+        String carta=this.myCasino.llamarOtraCarta(1);
+        
+        if(carta.equalsIgnoreCase("Perdio")){
+            Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
+            this.btnOtra2.setEnabled(false);
+            this.btnStop2.setEnabled(false);
+            return;
+        }
+        if(carta.equalsIgnoreCase("Solo5")){
+            Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+            this.btnOtra2.setEnabled(false);
+            this.btnStop2.setEnabled(false);
+            return;
+        }
+
+        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+        JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
+        for(JLabel l:cartasEtiquetas){
+            if(l.getText().isEmpty()){
+                l.setText(carta);
+                break;
+            } 
+        }       
+      }
+      
     }//GEN-LAST:event_btnOtra2ActionPerformed
 
+    public void otraCartaCrupier(){
+        this.btnNuevo.setEnabled(true);
+        while(this.crupier){
+            int puntajeCrup=Integer.parseInt(this.lblPuntaje2Mod.getText());
+        if(puntajeCrup<17){
+                String carta=this.myCasino.llamarOtraCarta(1);
+        
+                if(carta.equalsIgnoreCase("Perdio")){
+                    Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
+                    return;
+                 }
+                if(carta.equalsIgnoreCase("Solo5")){
+                  Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+                  return;
+                 }
+                
+                this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+                 JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
+                 for(JLabel l:cartasEtiquetas){
+                     if(l.getText().isEmpty()){
+                       l.setText(carta);
+                       break;
+                     } 
+                } 
+             break;
+            }
+        }
+        //int puntaje1=Integer.parseInt(this.lblPuntaje1Mod.getText());
+       // int puntaje2=Integer.parseInt(this.lblPuntaje2Mod.getText());
+    }
+    
+    
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
+        this.limpiarVista();
+        this.btnOtra1.setEnabled(false);
+        this.btnOtra2.setEnabled(false);
+        this.btnStop1.setEnabled(false);
+        this.btnStop2.setEnabled(false);
+        this.lblPuntaje1Mod.setText("");
+        this.lblPuntaje2Mod.setText("");
+        this.btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    public void limpiarVista(){
+        this.txtApuesta1.setText("");
+        this.txtApuesta2.setText("");
+        this.lblPuntaje1Mod.setText("0");
+        this.lblPuntaje2Mod.setText("0");
+        this.lblC1J1.setText("");
+        this.lblC2J1.setText("");
+        this.lblC3J1.setText("");
+        this.lblC4J1.setText("");
+        this.lblC5J1.setText("");
+        this.lblC1J2.setText("");
+        this.lblC2J2.setText("");
+        this.lblC3J2.setText("");
+        this.lblC4J2.setText("");
+        this.lblC5J2.setText("");
+        this.txtJugadores.setText("");
+    }
+    
     private void txtApuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApuesta1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApuesta1ActionPerformed
@@ -615,6 +701,8 @@ public class Blackjack extends javax.swing.JFrame {
         }
         this.btnOtra2.setEnabled(false);
         this.btnStop2.setEnabled(false);
+        this.btnNuevo.setEnabled(true);
+        
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
@@ -636,23 +724,32 @@ public class Blackjack extends javax.swing.JFrame {
             this.btnOtra2.setEnabled(true);
             this.btnStop2.setEnabled(true);
         }
-
+        
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
         // TODO add your handling code here:
+        this.btnOtra1.setEnabled(true);
+        this.btnStop1.setEnabled(true);
+        this.btnOtra2.setEnabled(false);
+        this.btnStop2.setEnabled(false);
+        
         if (this.cmbJug1.getSelectedItem().toString().equals(this.cmbJug2.getSelectedItem().toString())) {
             Ventana.imp("No puede jugar contra el mismo", "Sistema");
             return;
         }
+        
         if (this.crupier) {
-           this.startCrupier();   
+           this.startCrupier();
+           this.otraCartaCrupier();
            
         }
         if(!this.crupier){
             this.startJugador();
         }
-    
+        
+        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
+        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
     }//GEN-LAST:event_btnStartActionPerformed
     
     private void startJugador(){
@@ -695,9 +792,6 @@ public class Blackjack extends javax.swing.JFrame {
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
-        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
-        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-        this.txtJugadores.setText(this.myCasino.haberBlackJack());
     }
     
     private void startCrupier(){
@@ -738,16 +832,18 @@ public class Blackjack extends javax.swing.JFrame {
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
-        this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
-        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-        this.txtJugadores.setText(this.myCasino.haberBlackJack());
+        
     }
+    
     public void modificarLblJug2() {
         this.lblJ2.setText("CRUPIER");
         this.lblJ1.setText("JUGADOR");
         this.lblPuntJug2.setText("CRUPIER");
         this.txtApuesta2.setEnabled(false);
-        this.txtApuesta2.setText("Igual a la otra apuesta");
+        this.txtApuesta2.setText("(Igual a la otra apuesta)");
+        this.btnOtra2.setVisible(false);
+        this.btnStop2.setVisible(false);
+     
     }
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
@@ -772,13 +868,15 @@ public class Blackjack extends javax.swing.JFrame {
         }
 
         this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
-        JLabel cartasEtiquetas[] = {this.lblC3J1, this.lblC4J1, this.lblC5J2};
+        JLabel cartasEtiquetas[] = {this.lblC3J1, this.lblC4J1, this.lblC5J1};
         for(JLabel l:cartasEtiquetas){
             if(l.getText().isEmpty()){
                 l.setText(carta);
                 break;
             } 
         }
+        
+        if(this.crupier){this.txtJugadores.setText("");}
     }//GEN-LAST:event_btnOtra1ActionPerformed
 
     private void cmbJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJug1ActionPerformed

@@ -97,6 +97,12 @@ public class PartidoBlackjack extends Partido {
         ganancia *= 3;
         return ganancia;
     }
+    
+    public int premiarGanado(int index){
+        int ganancia = super.getMyJuego(0).getMyJugador().getApuesta() + super.getMyJuego(1).getMyJugador().getApuesta();
+        ganancia += (super.getMyJuego(index).getMyJugador().getApuesta())/2;
+        return ganancia;   
+    }
 
     public int premiarCru() {
         int ganancia = super.getMyJuego(0).getMyJugador().getApuesta() + super.getMyJuego(1).getMyJugador().getApuesta();
