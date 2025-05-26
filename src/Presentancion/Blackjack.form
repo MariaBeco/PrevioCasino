@@ -103,7 +103,7 @@
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="btnOtra1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="btnStop1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnStart" min="-2" pref="105" max="-2" attributes="0"/>

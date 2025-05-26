@@ -527,7 +527,7 @@ public class Blackjack extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(btnOtra1)
-                        .addGap(32, 32, 32)
+                        .addGap(53, 53, 53)
                         .addComponent(btnStop1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnStart, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -624,7 +624,6 @@ public class Blackjack extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOtra2ActionPerformed
 
     public void otraCartaCrupier() {
-        this.btnNuevo.setEnabled(true);
         int puntajeCrup = Integer.parseInt(this.lblPuntaje2Mod.getText());
         while (this.crupier && puntajeCrup < 17) {
             String carta = this.myCasino.llamarOtraCarta(1);
@@ -647,8 +646,9 @@ public class Blackjack extends javax.swing.JFrame {
                     break;
                 }
             }
-            puntajeCrup= Integer.parseInt(this.lblPuntaje2Mod.getText());
+            puntajeCrup = Integer.parseInt(this.lblPuntaje2Mod.getText());
         }
+
         this.btnNuevo.setEnabled(true);
     }
 
@@ -696,9 +696,12 @@ public class Blackjack extends javax.swing.JFrame {
         }
         this.btnOtra2.setEnabled(false);
         this.btnStop2.setEnabled(false);
-        this.btnNuevo.setEnabled(true);
-        String cad = this.myCasino.ganador();
-        this.txtJugadores.setText(cad);
+        if (!this.crupier) {
+            this.btnNuevo.setEnabled(true);
+            String cad = this.myCasino.ganador();
+            this.txtJugadores.setText(cad);
+        }
+
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
@@ -717,9 +720,11 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
         if (this.crupier) {
+            System.out.println("ENTRO A OTRA CARTA");
             this.otraCartaCrupier();
-            String cad = this.myCasino.ganadorCrupier();
-            this.txtJugadores.setText(cad);
+            String resultado = this.myCasino.ganadorCrupier();
+            this.txtJugadores.setText(resultado);
+
         }
         if (!this.crupier) {
             this.btnOtra2.setEnabled(true);
@@ -742,23 +747,29 @@ public class Blackjack extends javax.swing.JFrame {
 
         if (this.crupier) {
             this.startCrupier();
-            this.otraCartaCrupier();
+            //this.otraCartaCrupier();
+            System.out.println("inicio del jugego con crupier");
             String cad = this.myCasino.haberBlackJackCrupier();
             if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
+                System.out.println("SI HUBO BLACKJACK");
+                this.txtJugadores.setText(cad);
                 this.btnOtra1.setEnabled(false);
                 this.btnStop1.setEnabled(false);
                 this.btnOtra2.setEnabled(false);
                 this.btnStop2.setEnabled(false);
+                this.btnNuevo.setEnabled(true);
             }
         }
         if (!this.crupier) {
             this.startJugador();
             String cad = this.myCasino.haberBlackJack();
             if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
+                this.txtJugadores.setText(cad);
                 this.btnOtra1.setEnabled(false);
                 this.btnStop1.setEnabled(false);
                 this.btnOtra2.setEnabled(false);
                 this.btnStop2.setEnabled(false);
+                this.btnNuevo.setEnabled(true);
             }
         }
 
@@ -869,6 +880,11 @@ public class Blackjack extends javax.swing.JFrame {
             Ventana.imp("Ha perdido, su puntaje es mayor de 21, sigue jugador 2", "Sistema");
             this.btnOtra1.setEnabled(false);
             this.btnStop1.setEnabled(false);
+            if (crupier) {
+                String resultado = this.myCasino.ganadorCrupier();
+                this.txtJugadores.setText(resultado);
+                return;
+            }
             this.btnOtra2.setEnabled(true);
             this.btnStop2.setEnabled(true);
             return;
@@ -877,6 +893,11 @@ public class Blackjack extends javax.swing.JFrame {
             Ventana.imp("Solo puede tener 5 cartas", "Sistema");
             this.btnOtra1.setEnabled(false);
             this.btnStop1.setEnabled(false);
+            if (crupier) {
+                String resultado = this.myCasino.ganadorCrupier();
+                this.txtJugadores.setText(resultado);
+                return;
+            }
             this.btnOtra2.setEnabled(true);
             this.btnStop2.setEnabled(true);
             return;
@@ -892,9 +913,9 @@ public class Blackjack extends javax.swing.JFrame {
         }
         this.plantarseAuto(0);
 
-        if (this.crupier) {
+        /*if (this.crupier) {
             this.txtJugadores.setText("");
-        }
+        }*/
     }//GEN-LAST:event_btnOtra1ActionPerformed
 
     private void plantarseAuto(int index) {
