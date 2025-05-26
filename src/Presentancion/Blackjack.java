@@ -598,66 +598,67 @@ public class Blackjack extends javax.swing.JFrame {
 
     private void btnOtra2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra2ActionPerformed
         // TODO add your handling code here:
-        if(!this.crupier){
-        String carta=this.myCasino.llamarOtraCarta(1);
-        
-        if(carta.equalsIgnoreCase("Perdio")){
-            Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
-            this.btnOtra2.setEnabled(false);
-            this.btnStop2.setEnabled(false);
-            return;
-        }
-        if(carta.equalsIgnoreCase("Solo5")){
-            Ventana.imp("Solo puede tener 5 cartas", "Sistema");
-            this.btnOtra2.setEnabled(false);
-            this.btnStop2.setEnabled(false);
-            return;
+        if (!this.crupier) {
+            String carta = this.myCasino.llamarOtraCarta(1);
+
+            if (carta.equalsIgnoreCase("Perdio")) {
+                Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
+                this.btnOtra2.setEnabled(false);
+                this.btnStop2.setEnabled(false);
+                return;
+            }
+            if (carta.equalsIgnoreCase("Solo5")) {
+                Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+                this.btnOtra2.setEnabled(false);
+                this.btnStop2.setEnabled(false);
+                return;
+            }
+
+            this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+            JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
+            for (JLabel l : cartasEtiquetas) {
+                if (l.getText().isEmpty()) {
+                    l.setText(carta);
+                    break;
+                }
+            }
+            this.plantarseAuto(0);
         }
 
-        this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-        JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
-        for(JLabel l:cartasEtiquetas){
-            if(l.getText().isEmpty()){
-                l.setText(carta);
-                break;
-            } 
-        }       
-      }
-      
     }//GEN-LAST:event_btnOtra2ActionPerformed
 
-    public void otraCartaCrupier(){
+    public void otraCartaCrupier() {
         this.btnNuevo.setEnabled(true);
-        while(this.crupier){
-            int puntajeCrup=Integer.parseInt(this.lblPuntaje2Mod.getText());
-        if(puntajeCrup<17){
-                String carta=this.myCasino.llamarOtraCarta(1);
-        
-                if(carta.equalsIgnoreCase("Perdio")){
+        while (this.crupier) {
+            int puntajeCrup = Integer.parseInt(this.lblPuntaje2Mod.getText());
+            if (puntajeCrup < 17) {
+                String carta = this.myCasino.llamarOtraCarta(1);
+
+                if (carta.equalsIgnoreCase("Perdio")) {
                     Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
                     return;
-                 }
-                if(carta.equalsIgnoreCase("Solo5")){
-                  Ventana.imp("Solo puede tener 5 cartas", "Sistema");
-                  return;
-                 }
-                
+                }
+                if (carta.equalsIgnoreCase("Solo5")) {
+                    Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+                    return;
+                }
+
                 this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-                 JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
-                 for(JLabel l:cartasEtiquetas){
-                     if(l.getText().isEmpty()){
-                       l.setText(carta);
-                       break;
-                     } 
-                } 
-             break;
+                JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
+                for (JLabel l : cartasEtiquetas) {
+                    if (l.getText().isEmpty()) {
+                        l.setText(carta);
+                        break;
+                    }
+                }
+                break;
             }
         }
         //int puntaje1=Integer.parseInt(this.lblPuntaje1Mod.getText());
-       // int puntaje2=Integer.parseInt(this.lblPuntaje2Mod.getText());
+        // int puntaje2=Integer.parseInt(this.lblPuntaje2Mod.getText());
     }
-    
-    
+
+
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
         this.limpiarVista();
@@ -670,7 +671,7 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnNuevo.setEnabled(false);
     }//GEN-LAST:event_btnNuevoActionPerformed
 
-    public void limpiarVista(){
+    public void limpiarVista() {
         this.txtApuesta1.setText("");
         this.txtApuesta2.setText("");
         this.lblPuntaje1Mod.setText("0");
@@ -687,7 +688,7 @@ public class Blackjack extends javax.swing.JFrame {
         this.lblC5J2.setText("");
         this.txtJugadores.setText("");
     }
-    
+
     private void txtApuesta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApuesta1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApuesta1ActionPerformed
@@ -702,12 +703,13 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnOtra2.setEnabled(false);
         this.btnStop2.setEnabled(false);
         this.btnNuevo.setEnabled(true);
-        
+        String cad=this.myCasino.ganador();
+        this.txtJugadores.setText(cad);
     }//GEN-LAST:event_btnStop2ActionPerformed
 
     private void btnSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaldoActionPerformed
         // TODO add your handling code here:
-        String informeSaldo=this.myCasino.saldo();
+        String informeSaldo = this.myCasino.saldo();
         this.txtJugadores.setText(informeSaldo);
     }//GEN-LAST:event_btnSaldoActionPerformed
 
@@ -720,11 +722,15 @@ public class Blackjack extends javax.swing.JFrame {
         }
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
+        if(this.crupier){
+            String cad=this.myCasino.ganadorCrupier();
+            this.txtJugadores.setText(cad);
+        }
         if (!this.crupier) {
             this.btnOtra2.setEnabled(true);
             this.btnStop2.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_btnStop1ActionPerformed
 
     private void btnStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartActionPerformed
@@ -733,26 +739,40 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnStop1.setEnabled(true);
         this.btnOtra2.setEnabled(false);
         this.btnStop2.setEnabled(false);
-        
+
         if (this.cmbJug1.getSelectedItem().toString().equals(this.cmbJug2.getSelectedItem().toString())) {
             Ventana.imp("No puede jugar contra el mismo", "Sistema");
             return;
         }
-        
+
         if (this.crupier) {
-           this.startCrupier();
-           this.otraCartaCrupier();
-           
+            this.startCrupier();
+            this.otraCartaCrupier();
+            String cad=this.myCasino.haberBlackJackCrupier();
+            if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
+                this.btnOtra1.setEnabled(false);
+                this.btnStop1.setEnabled(false);
+                this.btnOtra2.setEnabled(false);
+                this.btnStop2.setEnabled(false);
+            }
         }
-        if(!this.crupier){
+        if (!this.crupier) {
             this.startJugador();
+            String cad = this.myCasino.haberBlackJack();
+            if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
+                this.btnOtra1.setEnabled(false);
+                this.btnStop1.setEnabled(false);
+                this.btnOtra2.setEnabled(false);
+                this.btnStop2.setEnabled(false);
+            }
         }
-        
+
         this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
         this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+
     }//GEN-LAST:event_btnStartActionPerformed
-    
-    private void startJugador(){
+
+    private void startJugador() {
         if (this.txtApuesta1.getText().isEmpty() || this.txtApuesta2.getText().isEmpty()) {
             Ventana.imp("¡Digite todos los campos!", "Sistema");
             return;
@@ -771,21 +791,21 @@ public class Blackjack extends javax.swing.JFrame {
 
         int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
         int apuesta2 = Integer.parseInt(this.txtApuesta2.getText());
-        
-        if(this.myCasino.dineroNoSuficiente()){
-             Ventana.imp("No hay dinero suficiente", "Sistema");        
-             while(this.myCasino.getMyCaja()<150000){
-                 int cajaAgregar=Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
-                 this.myCasino.setMyCaja(this.myCasino.getMyCaja()+cajaAgregar);
-             }
+
+        if (this.myCasino.dineroNoSuficiente()) {
+            Ventana.imp("No hay dinero suficiente", "Sistema");
+            while (this.myCasino.getMyCaja() < 150000) {
+                int cajaAgregar = Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
+                this.myCasino.setMyCaja(this.myCasino.getMyCaja() + cajaAgregar);
+            }
         }
-        
+
         String fecha = this.lblFecha.getText();
 
         String[] cartas = this.myCasino.startBlackjackDos(apuesta1, apuesta2, cedula1, cedula2, fecha);
         if (cartas.length == 1) {
             Ventana.imp(cartas[0], "Sistema");
-            return;   
+            return;
         }
         JLabel cartasEtiqueda[] = {this.lblNumeroPartido, this.lblC1J1, this.lblC2J1, this.lblC1J2, this.lblC2J2};
         this.etiquetas = cartasEtiqueda;
@@ -793,48 +813,48 @@ public class Blackjack extends javax.swing.JFrame {
             cartasEtiqueda[i].setText(cartas[i]);
         }
     }
-    
-    private void startCrupier(){
+
+    private void startCrupier() {
         if (this.txtApuesta1.getText().isEmpty()) {
-                Ventana.imp("¡Digite todos los campos!", "Sistema");
-                return;
-            }
-            this.btnOtra2.setEnabled(false);
-            this.btnStop2.setEnabled(false);
-            
+            Ventana.imp("¡Digite todos los campos!", "Sistema");
+            return;
+        }
+        this.btnOtra2.setEnabled(false);
+        this.btnStop2.setEnabled(false);
+
         String dato1 = this.cmbJug1.getSelectedItem().toString();
         String ced1[] = dato1.split("-");
         String cedula1 = ced1[1];
         String dato2 = this.cmbJug2.getSelectedItem().toString();
         String ced2[] = dato2.split("-");
         String cedula2 = ced1[1];
-        
+
         int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
         this.txtApuesta2.setText(this.txtApuesta1.getText());
         int apuesta2 = apuesta1;
 
-        if(this.myCasino.dineroNoSuficiente()){
-             Ventana.imp("No hay dinero suficiente", "Sistema");        
-             while(this.myCasino.getMyCaja()<150000){
-                 int cajaAgregar=Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
-                 this.myCasino.setMyCaja(this.myCasino.getMyCaja()+cajaAgregar);
-             }
+        if (this.myCasino.dineroNoSuficiente()) {
+            Ventana.imp("No hay dinero suficiente", "Sistema");
+            while (this.myCasino.getMyCaja() < 150000) {
+                int cajaAgregar = Ventana.leerInt("Digite la cantidad de dinero que se va añadir a la caja");
+                this.myCasino.setMyCaja(this.myCasino.getMyCaja() + cajaAgregar);
+            }
         }
-        
+
         String fecha = this.lblFecha.getText();
         String[] cartas = this.myCasino.StartBlackjackUno(apuesta1, apuesta2, cedula1, cedula2, fecha);
         if (cartas.length == 1) {
             Ventana.imp(cartas[0], "Sistema");
-            return;   
+            return;
         }
         JLabel cartasEtiqueda[] = {this.lblNumeroPartido, this.lblC1J1, this.lblC2J1, this.lblC1J2, this.lblC2J2};
         this.etiquetas = cartasEtiqueda;
         for (int i = 0; i < cartasEtiqueda.length; i++) {
             cartasEtiqueda[i].setText(cartas[i]);
         }
-        
+
     }
-    
+
     public void modificarLblJug2() {
         this.lblJ2.setText("CRUPIER");
         this.lblJ1.setText("JUGADOR");
@@ -843,14 +863,14 @@ public class Blackjack extends javax.swing.JFrame {
         this.txtApuesta2.setText("(Igual a la otra apuesta)");
         this.btnOtra2.setVisible(false);
         this.btnStop2.setVisible(false);
-     
+
     }
 
     private void btnOtra1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOtra1ActionPerformed
         // TODO add your handling code here:
-        String carta=this.myCasino.llamarOtraCarta(0);
-        
-        if(carta.equalsIgnoreCase("Perdio")){
+        String carta = this.myCasino.llamarOtraCarta(0);
+
+        if (carta.equalsIgnoreCase("Perdio")) {
             Ventana.imp("Ha perdido, su puntaje es mayor de 21, sigue jugador 2", "Sistema");
             this.btnOtra1.setEnabled(false);
             this.btnStop1.setEnabled(false);
@@ -858,7 +878,7 @@ public class Blackjack extends javax.swing.JFrame {
             this.btnStop2.setEnabled(true);
             return;
         }
-        if(carta.equalsIgnoreCase("Solo5")){
+        if (carta.equalsIgnoreCase("Solo5")) {
             Ventana.imp("Solo puede tener 5 cartas", "Sistema");
             this.btnOtra1.setEnabled(false);
             this.btnStop1.setEnabled(false);
@@ -869,16 +889,33 @@ public class Blackjack extends javax.swing.JFrame {
 
         this.lblPuntaje1Mod.setText(this.myCasino.mostrarPuntaje(0));
         JLabel cartasEtiquetas[] = {this.lblC3J1, this.lblC4J1, this.lblC5J1};
-        for(JLabel l:cartasEtiquetas){
-            if(l.getText().isEmpty()){
+        for (JLabel l : cartasEtiquetas) {
+            if (l.getText().isEmpty()) {
                 l.setText(carta);
                 break;
-            } 
+            }
         }
-        
-        if(this.crupier){this.txtJugadores.setText("");}
+        this.plantarseAuto(0);
+
+        if (this.crupier) {
+            this.txtJugadores.setText("");
+        }
     }//GEN-LAST:event_btnOtra1ActionPerformed
 
+    private void plantarseAuto(int index) {
+        int puntaje;
+        if (index == 0) {
+            puntaje = Integer.parseInt(this.lblPuntaje1Mod.getText().toString());
+            if (puntaje <= 21) {
+                this.btnStop1.doClick();
+            }
+        }
+        puntaje = Integer.parseInt(this.lblPuntaje2Mod.getText().toString());
+        if (puntaje <= 21) {
+            this.btnStop2.doClick();
+        }
+
+    }
     private void cmbJug1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbJug1ActionPerformed
         // TODO add your handling code here:
         //this.jug1Seleccionado();

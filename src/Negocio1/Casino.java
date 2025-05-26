@@ -21,7 +21,7 @@ public class Casino {
     //blackjack
     public Casino(int myCaja, int num) {
         this.myCaja = myCaja;
-        this.myCajaInicial=myCaja;
+        this.myCajaInicial = myCaja;
         this.myPartidosB = new ArrayList<>();
         this.myJugadores = new ArrayList<>();
         this.myCrupiers = new ArrayList<>();
@@ -32,7 +32,7 @@ public class Casino {
     public int getMySaldoPagadoBlackjack() {
         return mySaldoPagadoBlackjack;
     }
-    
+
     public int getMyCajaInicial() {
         return myCaja;
     }
@@ -148,11 +148,9 @@ public class Casino {
         String nombre = "Blackjack";
 
         this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0), myCrupiers.get(0)));
-        PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, this.myJugadores.get(jugador2), this.myBarajas.get(0), myCrupiers.get(0));
 
-        int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
-        cad[0] ="Partida No. "+(numPartida+1);
+        cad[0] = "Partida No. " + (numPartida + 1);
         String cartas[] = this.myPartidosB.getLast().enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
@@ -190,11 +188,9 @@ public class Casino {
         String nombre = "Blackjack";
         Jugador jugNull = null;
         this.myPartidosB.add(new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, jugNull, this.myBarajas.get(0), this.myCrupiers.get(crupier)));
-        PartidoBlackjack p = new PartidoBlackjack(fecha, this.myJugadores.get(jugador1), nombre, numPartida, jugNull, this.myBarajas.get(0), this.myCrupiers.get(crupier));
 
-        int indexPartido = this.indexPartidoB(p);
         cad = new String[5];
-        cad[0] ="Partida No. "+(numPartida+1);
+        cad[0] = "Partida No. " + (numPartida + 1);
         String cartas[] = this.myPartidosB.getLast().enviarCartasInicio();
         for (int i = 1; i < 5; i++) {
             cad[i] = cartas[i - 1];
@@ -210,7 +206,6 @@ public class Casino {
         }
         return validar;
     }*/
-
     public boolean dineroNoSuficiente() {
         boolean noSuficiente = false;
         if (this.myCaja <= 150000) {
@@ -230,7 +225,7 @@ public class Casino {
         return index;
     }
 
-  /*  private int numPartidaDosJugadores(Jugador jug1, Jugador jug2, String fecha) {
+    /*  private int numPartidaDosJugadores(Jugador jug1, Jugador jug2, String fecha) {
         int numPartida = 0;
         if (this.myPartidosB != null) {
             for (Partido p : this.myPartidosB) {
@@ -241,7 +236,6 @@ public class Casino {
         }
         return numPartida;
     }*/
-
     private int contarPartidaJugador(Jugador obj, String fecha) {
         int numPartida = 0;
         if (this.myPartidosB != null) {
@@ -306,6 +300,86 @@ public class Casino {
 
     public String haberBlackJack() {
         String p = this.myPartidosB.getLast().hayBlackjack();
+        if (p.equalsIgnoreCase("Ha ocurrido un empate")) {
+            int apuestas = this.myPartidosB.getLast().getMyJuego(0).getMyJugador().getApuesta() + this.myPartidosB.getLast().getMyJuego(1).getMyJugador().getApuesta();
+            this.myCaja -= apuestas;
+            return "Ha ocurrido un empate, se ha devuelto el valor de las apuestas";
+        }
+        if (this.myPartidosB.getLast().getMyGanador() != null) {
+            int premio = this.myPartidosB.getLast().premiarJugBlackjack();
+            this.mySaldoPagadoBlackjack += premio;
+            this.myCaja -= premio;
+            return p;
+        }
+
+        return p;
+    }
+
+    public String haberBlackJackCrupier() {
+        String p = this.myPartidosB.getLast().hayBlackjackCrupier();
+        if (p.equalsIgnoreCase("Ha ocurrido un empate")) {
+            this.myCaja -= this.myPartidosB.getLast().getMyJuego(0).getMyJugador().getApuesta();
+            return "Ha ocurrido un empate, se ha devuelto el valor de la apuesta";
+        }
+        if (this.myPartidosB.getLast().getMyGanador() != null) {
+            int premio = this.myPartidosB.getLast().premiarJugBlackjack();
+            this.mySaldoPagadoBlackjack += premio;
+            this.myCaja -= premio;
+            return p;
+        }
+        if (this.myPartidosB.getLast().getMyGanadorCru() != null) {
+            this.myCaja -= this.myPartidosB.getLast().premiarCru();
+            return p;
+        }
+        return p;
+    }
+
+    public String ganador() {
+        String p = this.myPartidosB.getLast().ganador();
+        if (p.equalsIgnoreCase("Ha ocurrido un empate")) {
+            int apuestas = this.myPartidosB.getLast().getMyJuego(0).getMyJugador().getApuesta() + this.myPartidosB.getLast().getMyJuego(1).getMyJugador().getApuesta();
+            this.myCaja -= apuestas;
+            return "Ha ocurrido un empate, se ha devuelto el valor de las apuestas";
+        }
+        if (this.myPartidosB.getLast().getMyGanador() != null) {
+            if (this.myPartidosB.getLast().getMyGanador().equals(this.myPartidosB.getLast().getMyJuego(0).getMyJugador())) {
+                int premio = this.myPartidosB.getLast().premiarGanado(0);
+                this.mySaldoPagadoBlackjack += premio;
+                this.myCaja -= premio;
+                return p;
+            }
+            int premio = this.myPartidosB.getLast().premiarGanado(1);
+            this.mySaldoPagadoBlackjack += premio;
+            this.myCaja -= premio;
+            return p;
+        }
+        return p;
+    }
+
+    public String ganadorCrupier() {
+        String p = this.myPartidosB.getLast().ganador();
+        if (p.equalsIgnoreCase("Ha ocurrido un empate")) {
+            int apuestas = this.myPartidosB.getLast().getMyJuego(0).getMyJugador().getApuesta();
+            this.myCaja -= apuestas;
+            return "Ha ocurrido un empate, se ha devuelto el valor de la apuesta";
+        }
+        if (this.myPartidosB.getLast().getMyGanador() != null) {
+            if (this.myPartidosB.getLast().getMyGanador().equals(this.myPartidosB.getLast().getMyJuego(0).getMyJugador())) {
+                int premio = this.myPartidosB.getLast().premiarGanado(0);
+                this.mySaldoPagadoBlackjack += premio;
+                this.myCaja -= premio;
+                return p;
+            }
+            int premio = this.myPartidosB.getLast().premiarGanado(1);
+            this.mySaldoPagadoBlackjack += premio;
+            this.myCaja -= premio;
+            return p;
+        }
+        
+        if (this.myPartidosB.getLast().getMyGanadorCru() != null) {
+            this.myCaja -= this.myPartidosB.getLast().premiarCru();
+            return p;
+        }
         return p;
     }
 
@@ -314,61 +388,59 @@ public class Casino {
         return puntaje1;
     }
 
-    public String saldo(){
-        String saldoAct="";
-        if(this.myPartidosB.isEmpty()){
-        return "No hay partidos registrados";
+    public String saldo() {
+        String saldoAct = "";
+        if (this.myPartidosB.isEmpty()) {
+            return "No hay partidos registrados";
         }
-        
-        int cajaAntes=this.myCaja;
-        
-        saldoAct+="El casino tiene un saldo para pagar apuestas de "+cajaAntes;
-        
-        if(this.myPartidosB.getLast().getMyGanador()!=null){
-            int premio=this.myPartidosB.getLast().premiarJugBlackjack();
-            this.mySaldoPagadoBlackjack+=premio;
-            this.myCaja -= premio;
-            saldoAct+="\n !Ha habido un ganador¡ el saldo actualizado para pagar apuestas es "+this.myCaja;
+
+        int cajaAntes = this.myCaja;
+
+        saldoAct += "El casino tiene un saldo para pagar apuestas de " + cajaAntes;
+
+        if (this.myPartidosB.getLast().getMyGanador() != null) {
+            saldoAct += "\n ¡Ha habido un ganador! el saldo actualizado para pagar apuestas es " + this.myCaja;
         }
-        
-        saldoAct+="\n Por apuestas Blackjack se ha pagado "+this.mySaldoPagadoBlackjack;
-        
+
+        saldoAct += "\n Por apuestas Blackjack se ha pagado " + this.mySaldoPagadoBlackjack;
+
         return saldoAct;
     }
+
     public String llamarOtraCarta(int index) {
         String c = this.myPartidosB.getLast().otraCartaJugador(index);
-        
+
         return c;
     }
-    
-    public boolean ganador(int index){
-        boolean ganador=this.myPartidosB.getLast().gano(index);
+
+    public boolean ganador(int index) {
+        boolean ganador = this.myPartidosB.getLast().gano(index);
         return ganador;
     }
 
-    public int llamarPagoJugB(int index){
-        int pago= this.myPartidosB.getLast().premiarJugBlackjack();
-        this.setMyCaja(this.myCaja- pago);
-        this.mySaldoPagadoBlackjack+=pago;
+    public int llamarPagoJugB(int index) {
+        int pago = this.myPartidosB.getLast().premiarJugBlackjack();
+        this.setMyCaja(this.myCaja - pago);
+        this.mySaldoPagadoBlackjack += pago;
         return pago;
     }
-    
-    public int llamarPagoJug(int index){
-        int pago= this.myPartidosB.getLast().premiarGanado(index);
-        this.setMyCaja(this.myCaja- pago);
-        this.mySaldoPagadoBlackjack+=pago;
+
+    public int llamarPagoJug(int index) {
+        int pago = this.myPartidosB.getLast().premiarGanado(index);
+        this.setMyCaja(this.myCaja - pago);
+        this.mySaldoPagadoBlackjack += pago;
         return pago;
     }
-    
-    public int llamarPorcentajeCru(){
-        int porcentaje=this.myPartidosB.getLast().premiarCru();
+
+    public int llamarPorcentajeCru() {
+        int porcentaje = this.myPartidosB.getLast().premiarCru();
         return porcentaje;
     }
-    
-    public boolean llamarPerdio(int index){
-        boolean perdio=false;
-        if(this.myPartidosB.getLast().perdio(index)){
-        perdio=true;
+
+    public boolean llamarPerdio(int index) {
+        boolean perdio = false;
+        if (this.myPartidosB.getLast().perdio(index)) {
+            perdio = true;
         }
         return perdio;
     }
