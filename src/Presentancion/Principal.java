@@ -484,6 +484,8 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnFormSustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormSustActionPerformed
         // TODO add your handling code here:
+        FormSustentacion form3=new FormSustentacion(this, myCasino);
+        
     }//GEN-LAST:event_btnFormSustActionPerformed
 
     /**
