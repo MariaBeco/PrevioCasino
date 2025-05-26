@@ -39,8 +39,10 @@ public class PartidoBlackjack extends Partido {
                 cartasSeleccionadas++;
                 if (cartasSeleccionadas <= 2) {
                     super.getMyJuego(0).setMyCartas(c);
+                    super.getMyJuego(0).setPuntaje(super.getMyJuego(0).getPuntaje() + c.getValor());
                 } else {
                     super.getMyJuego(1).setMyCartas(c);
+                    super.getMyJuego(1).setPuntaje(super.getMyJuego(1).getPuntaje() + c.getValor());
                 }
             }
             if (cartasSeleccionadas == 4) {
@@ -111,11 +113,8 @@ public class PartidoBlackjack extends Partido {
             return "Ambos jugadores han perdido";
         }
 
-        if (jug1 && !jug2) {
-            int premioJug2 = this.premiarGanado(1);
-            this.myGanador = super.getMyJuego(1).getMyJugador();
-            this.puntajeGanador = pun2;
-            return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug2;
+        if (pun1 == pun2 && !jug1 && !jug2) {
+            return "Ha ocurrido un empate";
         }
 
         if (!jug1 && jug2) {
@@ -125,8 +124,11 @@ public class PartidoBlackjack extends Partido {
             return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug1;
         }
 
-        if (pun1 == pun2) {
-            return "Ha ocurrido un empate";
+        if (jug1 && !jug2) {
+            int premioJug2 = this.premiarGanado(1);
+            this.myGanador = super.getMyJuego(1).getMyJugador();
+            this.puntajeGanador = pun2;
+            return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug2;
         }
 
         if (pun1 > pun2) {
@@ -135,12 +137,13 @@ public class PartidoBlackjack extends Partido {
             this.puntajeGanador = pun1;
             return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug1;
         }
-
-        int premioJug2 = this.premiarGanado(1);
-        this.myGanador = super.getMyJuego(1).getMyJugador();
-        this.puntajeGanador = pun2;
-        return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug2;
-
+        if (pun1 < pun2) {
+            int premioJug2 = this.premiarGanado(1);
+            this.myGanador = super.getMyJuego(1).getMyJugador();
+            this.puntajeGanador = pun2;
+            return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug2;
+        }
+        return "";
     }
 
     public String ganadorCrupier() {
@@ -218,7 +221,7 @@ public class PartidoBlackjack extends Partido {
                 c.setOcupada(true);
                 carta = c.toString();
                 super.getMyJuego(index).setMyCartas(c);
-                super.getMyJuego(index).setPuntaje(index);
+                super.getMyJuego(index).setPuntaje(super.getMyJuego(index).getPuntaje() + c.getValor());
                 break;
             }
         }
@@ -254,15 +257,17 @@ public class PartidoBlackjack extends Partido {
         int puntaje = 0;
         int contAs = 0;
         for (Carta c : super.getMyJuego(index).getMyCartas()) {
-            if (this.esValorAs(c) == true && contAs == 0) {
+            if (this.esValorAs(c)) {
                 contAs++;
-            } else if (this.esValorAs(c) == true && contAs > 1) {
-                c.setValor(1);
-                contAs++;
+                puntaje += c.getValor();
+            } else {
+                puntaje += c.getValor();
             }
-            puntaje += c.getValor();
         }
-
+        while(puntaje>21&&contAs>0){
+            puntaje-=10;
+            contAs--;
+        }
         return puntaje;
     }
     //inicio juego que devuelve cuatro cartas   

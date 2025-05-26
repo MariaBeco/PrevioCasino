@@ -20,7 +20,7 @@ public class Blackjack extends javax.swing.JFrame {
     private Principal myPrincipal;
     private Casino myCasino;
     private JLabel etiquetas[];
-    private boolean crupier;
+    private boolean crupier = false;
 
     /**
      * Creates new form Blackjack
@@ -40,8 +40,6 @@ public class Blackjack extends javax.swing.JFrame {
             this.cmbJug2.addItem(jug);
         }
 
-        //this.cmbJug1.addActionListener(evento -> jug1Seleccionado());
-        //this.cmbJug2.addActionListener(evento -> jug2Seleccionado());
     }
 
     public Blackjack(Principal myPrincipal, Casino myCasino, boolean crupier) {
@@ -63,8 +61,6 @@ public class Blackjack extends javax.swing.JFrame {
             this.cmbJug2.addItem(cru);
         }
 
-        //this.cmbJug1.addActionListener(evento -> jug1Seleccionado());
-        //this.cmbJug2.addActionListener(evento -> jug2Seleccionado());
     }
 
     public Principal getMyPrincipal() {
@@ -622,37 +618,36 @@ public class Blackjack extends javax.swing.JFrame {
                     break;
                 }
             }
-            this.plantarseAuto(0);
+            this.plantarseAuto(1);
         }
 
     }//GEN-LAST:event_btnOtra2ActionPerformed
 
     public void otraCartaCrupier() {
         this.btnNuevo.setEnabled(true);
-        while (this.crupier) {
-            int puntajeCrup = Integer.parseInt(this.lblPuntaje2Mod.getText());
-            if (puntajeCrup < 17) {
-                String carta = this.myCasino.llamarOtraCarta(1);
+        int puntajeCrup = Integer.parseInt(this.lblPuntaje2Mod.getText());
+        while (this.crupier && puntajeCrup < 17) {
+            String carta = this.myCasino.llamarOtraCarta(1);
 
-                if (carta.equalsIgnoreCase("Perdio")) {
-                    Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
-                    return;
-                }
-                if (carta.equalsIgnoreCase("Solo5")) {
-                    Ventana.imp("Solo puede tener 5 cartas", "Sistema");
-                    return;
-                }
-
+            if (carta.equalsIgnoreCase("Perdio")) {
+                Ventana.imp("Ha perdido, su puntaje es mayor de 21, finalizando partida", "Sistema");
                 this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
-                JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
-                for (JLabel l : cartasEtiquetas) {
-                    if (l.getText().isEmpty()) {
-                        l.setText(carta);
-                        break;
-                    }
-                }
-                break;
+                return;
             }
+            if (carta.equalsIgnoreCase("Solo5")) {
+                Ventana.imp("Solo puede tener 5 cartas", "Sistema");
+                return;
+            }
+
+            this.lblPuntaje2Mod.setText(this.myCasino.mostrarPuntaje(1));
+            JLabel cartasEtiquetas[] = {this.lblC3J2, this.lblC4J2, this.lblC5J2};
+            for (JLabel l : cartasEtiquetas) {
+                if (l.getText().isEmpty()) {
+                    l.setText(carta);
+                    break;
+                }
+            }
+            puntajeCrup= Integer.parseInt(this.lblPuntaje2Mod.getText());
         }
         //int puntaje1=Integer.parseInt(this.lblPuntaje1Mod.getText());
         // int puntaje2=Integer.parseInt(this.lblPuntaje2Mod.getText());
@@ -703,7 +698,7 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnOtra2.setEnabled(false);
         this.btnStop2.setEnabled(false);
         this.btnNuevo.setEnabled(true);
-        String cad=this.myCasino.ganador();
+        String cad = this.myCasino.ganador();
         this.txtJugadores.setText(cad);
     }//GEN-LAST:event_btnStop2ActionPerformed
 
@@ -722,8 +717,8 @@ public class Blackjack extends javax.swing.JFrame {
         }
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
-        if(this.crupier){
-            String cad=this.myCasino.ganadorCrupier();
+        if (this.crupier) {
+            String cad = this.myCasino.ganadorCrupier();
             this.txtJugadores.setText(cad);
         }
         if (!this.crupier) {
@@ -748,7 +743,7 @@ public class Blackjack extends javax.swing.JFrame {
         if (this.crupier) {
             this.startCrupier();
             this.otraCartaCrupier();
-            String cad=this.myCasino.haberBlackJackCrupier();
+            String cad = this.myCasino.haberBlackJackCrupier();
             if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
                 this.btnOtra1.setEnabled(false);
                 this.btnStop1.setEnabled(false);
@@ -787,7 +782,7 @@ public class Blackjack extends javax.swing.JFrame {
         String cedula1 = ced1[1];
         String dato2 = this.cmbJug2.getSelectedItem().toString();
         String ced2[] = dato2.split("-");
-        String cedula2 = ced1[1];
+        String cedula2 = ced2[1];
 
         int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
         int apuesta2 = Integer.parseInt(this.txtApuesta2.getText());
@@ -827,7 +822,7 @@ public class Blackjack extends javax.swing.JFrame {
         String cedula1 = ced1[1];
         String dato2 = this.cmbJug2.getSelectedItem().toString();
         String ced2[] = dato2.split("-");
-        String cedula2 = ced1[1];
+        String cedula2 = ced2[1];
 
         int apuesta1 = Integer.parseInt(this.txtApuesta1.getText());
         this.txtApuesta2.setText(this.txtApuesta1.getText());
@@ -906,12 +901,13 @@ public class Blackjack extends javax.swing.JFrame {
         int puntaje;
         if (index == 0) {
             puntaje = Integer.parseInt(this.lblPuntaje1Mod.getText().toString());
-            if (puntaje <= 21) {
+            if (puntaje >= 21) {
                 this.btnStop1.doClick();
             }
+            return;
         }
         puntaje = Integer.parseInt(this.lblPuntaje2Mod.getText().toString());
-        if (puntaje <= 21) {
+        if (puntaje >= 21) {
             this.btnStop2.doClick();
         }
 
@@ -926,7 +922,7 @@ public class Blackjack extends javax.swing.JFrame {
         // TODO add your handling code here:
         //this.jug2Seleccionado();
     }//GEN-LAST:event_cmbJug2ActionPerformed
-
+    /*
     private void jug1Seleccionado() {
         try {
             String jug1 = this.cmbJug1.getSelectedItem().toString();
@@ -983,7 +979,7 @@ public class Blackjack extends javax.swing.JFrame {
 
     public void setCmbJug2(JComboBox<String> cmbJug2) {
         this.cmbJug2 = cmbJug2;
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevo;

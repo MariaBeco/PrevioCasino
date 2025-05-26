@@ -85,7 +85,13 @@ public class Casino {
             this.myBarajas.add(new Baraja(i));
         }
     }
-
+    
+    private void reiniciarBaraja(){
+        for(Carta c:this.myBarajas.get(0).getMyCartas()){
+            c.setOcupada(false);
+        }
+    }
+    
     public String validarHayCrupier() {
         if (this.myCrupiers == null || this.myCrupiers.isEmpty()) {
             return "No se puede iniciar sin un crupier.";
@@ -118,6 +124,7 @@ public class Casino {
     /*blackjack si son dos jugadores*/
     public String[] startBlackjackDos(int apuesta1, int apuesta2, String cedula1, String cedula2, String fecha) {
         String cad[] = new String[1];
+        this.reiniciarBaraja();
         if (this.myJugadores == null) {
             cad[0] = "No hay jugadores";
             return cad;
@@ -384,8 +391,8 @@ public class Casino {
     }
 
     public String mostrarPuntaje(int index) {
-        String puntaje1 = Integer.toString(this.myPartidosB.getLast().Puntaje(index));
-        return puntaje1;
+        String puntaje=Integer.toString(this.myPartidosB.getLast().getMyJuego(index).getPuntaje());
+        return puntaje;
     }
 
     public String saldo() {
