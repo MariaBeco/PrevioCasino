@@ -649,8 +649,7 @@ public class Blackjack extends javax.swing.JFrame {
             }
             puntajeCrup= Integer.parseInt(this.lblPuntaje2Mod.getText());
         }
-        //int puntaje1=Integer.parseInt(this.lblPuntaje1Mod.getText());
-        // int puntaje2=Integer.parseInt(this.lblPuntaje2Mod.getText());
+        this.btnNuevo.setEnabled(true);
     }
 
 
@@ -718,6 +717,7 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
         if (this.crupier) {
+            this.otraCartaCrupier();
             String cad = this.myCasino.ganadorCrupier();
             this.txtJugadores.setText(cad);
         }
