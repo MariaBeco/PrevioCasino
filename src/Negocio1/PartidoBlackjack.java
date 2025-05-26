@@ -93,9 +93,6 @@ public class PartidoBlackjack extends Partido {
             this.myGanador = this.getMyJuego(0).getMyJugador();
             this.puntajeGanador = this.getMyJuego(0).getPuntaje();
         } else if (puntaje2 == 21) {
-            
-            System.out.println("Hubo blackjack crupier");
-            
             super.getMyCrupier().setBonificacion(super.getMyCrupier().getBonificacion() + this.premiarCru());
             cad = "¡La casa ha ganado la partida!";
             this.myGanadorCru = super.getMyCrupier();
@@ -154,22 +151,16 @@ public class PartidoBlackjack extends Partido {
         boolean crupier = this.perdio(1);
         int pun1 = super.getMyJuego(0).getPuntaje();
         int pun2 = super.getMyJuego(1).getPuntaje();
-
-        System.out.println("puntaje 1"+pun1);
-        System.out.println("puntaje 2 "+pun2);
         
         if (jug1 && crupier) {
-            System.out.println("perdida doble");
             return "Ambos jugadores han perdido";
           }
 
         if (pun1 == pun2 && !jug1 && !crupier) {
-            System.out.println("empate");
             return "Ha ocurrido un empate";
         }
 
         if (jug1 && !crupier) {
-            System.out.println("gana crupier");
             super.getMyCrupier().setBonificacion(super.getMyCrupier().getBonificacion() + this.premiarCru());
             this.myGanadorCru = super.getMyCrupier();
             this.puntajeGanador = pun2;
@@ -177,7 +168,6 @@ public class PartidoBlackjack extends Partido {
         }
 
         if (!jug1 && crupier) {
-            System.out.println("gana jug");
             int premioJug1 = this.premiarGanadorConCru(0);
             this.myGanador = super.getMyJuego(0).getMyJugador();
             this.puntajeGanador = pun1;
@@ -185,13 +175,11 @@ public class PartidoBlackjack extends Partido {
         }
         
         if (pun1 > pun2) {
-            System.out.println("gana jug");
             int premioJug1 = this.premiarGanadorConCru(0);
             this.myGanador = super.getMyJuego(0).getMyJugador();
             this.puntajeGanador = pun1;
             return "¡Jugador " + myGanador.getNombre() + " ha ganado! su premio es " + premioJug1;
         }
-        System.out.println("gana crupier");
         super.getMyCrupier().setBonificacion(super.getMyCrupier().getBonificacion() + this.premiarCru());
         this.myGanadorCru = super.getMyCrupier();
         this.puntajeGanador = pun2;
@@ -220,7 +208,6 @@ public class PartidoBlackjack extends Partido {
     public int premiarGanadorConCru(int index){
         int ganancia = super.getMyJuego(0).getMyJugador().getApuesta() + super.getMyJuego(0).getMyJugador().getApuesta();
         ganancia += (super.getMyJuego(index).getMyJugador().getApuesta()) / 2;
-        System.out.println("premio ganador"+ganancia);
         return ganancia;
     }
     
@@ -228,7 +215,6 @@ public class PartidoBlackjack extends Partido {
         int ganancia = super.getMyJuego(0).getMyJugador().getApuesta() + super.getMyJuego(0).getMyJugador().getApuesta();
         double bonificacion = ganancia * 0.15;
         super.getMyCrupier().setBonificacion((int)bonificacion);
-        System.out.println("premio crupier"+bonificacion);
         return (int)bonificacion;
     }
 
@@ -241,7 +227,6 @@ public class PartidoBlackjack extends Partido {
         if (super.getMyJuego(index).getMyCartas().size() == 5) {
             return "Solo5";//significa que ya tiene las 5 cartas
         }
-                System.out.println("NUEVA CARTA");
         for (Carta c : super.getBarajaUsada().getMyCartas()) {
             if (!c.isOcupada()) {
                 c.setOcupada(true);

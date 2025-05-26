@@ -57,12 +57,19 @@ public class Juego {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
+    public String toStringCartas(){
+        String cad="";
+        for(Carta c:this.myCartas){
+            cad+=c.toString()+" - ";
+        }
+        return cad;
+    }
     
 
     @Override
     public String toString() {
-        return "Juego " + "myJugador= " + myJugador + ", puntaje= " + puntaje + ", nombre= " + nombre;
+        return "Juego " + "myJugador= " + myJugador + ", puntaje= " + puntaje + ", nombre= " + nombre+" cartas usadas= "+this.toStringCartas();
     }
     
 }

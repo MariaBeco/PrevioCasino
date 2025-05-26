@@ -14,6 +14,7 @@ import Presentacion.Ventana;
 public class Principal extends javax.swing.JFrame {
 
     private Casino myCasino;
+    private Blackjack myBlackjack;
 
     /**
      * Creates new form Principal
@@ -441,8 +442,10 @@ public class Principal extends javax.swing.JFrame {
             Ventana.imp(validacion, "Sistema");
             return;
         }
-        Blackjack form1 = new Blackjack(this, this.myCasino);
-        form1.setVisible(true);
+        if (myBlackjack == null || !myBlackjack.isDisplayable()) {
+        myBlackjack = new Blackjack(this, this.myCasino);
+    }
+    myBlackjack.setVisible(true);
 
     }//GEN-LAST:event_btnSeleccionBlackjackActionPerformed
 
@@ -452,10 +455,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnSeleccionBlackjack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionBlackjack1ActionPerformed
         // TODO add your handling code here:
+        String validacion = this.myCasino.validarHayCrupier();
+        if (!validacion.isEmpty()) {
+            Ventana.imp(validacion, "Sistema");
+            return;
+        }
         boolean crupier=true;
-        Blackjack form1=new Blackjack(this,this.myCasino,crupier);
-        form1.modificarLblJug2();
-        form1.setVisible(true);
+        if(myBlackjack==null || !myBlackjack.isDisplayable()){
+            myBlackjack=new Blackjack(this, myCasino, crupier);
+            myBlackjack.modificarLblJug2();
+        }
+        myBlackjack.setVisible(true);
     }//GEN-LAST:event_btnSeleccionBlackjack1ActionPerformed
 
     private void txtCedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedula1ActionPerformed

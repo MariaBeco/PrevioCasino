@@ -90,6 +90,7 @@ public class Casino {
         for(Carta c:this.myBarajas.get(0).getMyCartas()){
             c.setOcupada(false);
         }
+        //arrays cartas null
     }
     
     public String validarHayCrupier() {
@@ -187,7 +188,6 @@ public class Casino {
         this.myCrupiers.get(crupier).setApuesta(apuesta1);
 
         int numJug1 = this.contarPartidaJugadorConCrupier(this.myJugadores.get(jugador1), fecha)+1;
-        System.out.println("Numero jugadas "+numJug1);
         if (numJug1 > 10) {
             cad[0] = "No se puede iniciar la partida porque el jugador lleva 10 partidas";
             return cad;
@@ -247,6 +247,7 @@ public class Casino {
         }
         return numPartida;
     }*/
+    
     private int contarPartidaJugador(Jugador obj, String fecha) {
         int numPartida = 0;
         if (this.myPartidosB != null) {
@@ -339,9 +340,7 @@ public class Casino {
     }
 
     public String haberBlackJackCrupier() {
-        
-        System.out.println("BUSCAR SI HAY BLACKJACK");
-        
+                
         String p = this.myPartidosB.getLast().hayBlackjackCrupier();
         if (p.equalsIgnoreCase("Ha ocurrido un empate")) {
             this.myCaja -= this.myPartidosB.getLast().getMyJuego(0).getMyJugador().getApuesta();

@@ -120,6 +120,7 @@ public class Blackjack extends javax.swing.JFrame {
         lblPuntaje = new javax.swing.JLabel();
         lblPuntJug1 = new javax.swing.JLabel();
         lblPuntJug2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -131,8 +132,6 @@ public class Blackjack extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         panelPrincipal.setBackground(new java.awt.Color(51, 153, 0));
         panelPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102), 4));
@@ -450,7 +449,7 @@ public class Blackjack extends javax.swing.JFrame {
                         .addComponent(lblC2J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(41, 41, 41)
                         .addComponent(lblC3J1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -495,6 +494,14 @@ public class Blackjack extends javax.swing.JFrame {
                 .addContainerGap(55, Short.MAX_VALUE))
         );
 
+        jButton1.setFont(new java.awt.Font("Lucida Sans Unicode", 0, 12)); // NOI18N
+        jButton1.setText("Volver Principal");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
         panelPrincipalLayout.setHorizontalGroup(
@@ -511,20 +518,13 @@ public class Blackjack extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(panelJug1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelJug2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPrincipalLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addComponent(btnNuevo)
-                        .addGap(89, 89, 89)
-                        .addComponent(btnSaldo)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addComponent(btnOtra1)
                         .addGap(53, 53, 53)
@@ -535,7 +535,16 @@ public class Blackjack extends javax.swing.JFrame {
                         .addComponent(btnOtra2)
                         .addGap(34, 34, 34)
                         .addComponent(btnStop2)
-                        .addGap(123, 123, 123))))
+                        .addGap(123, 123, 123))
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnNuevo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSaldo)
+                        .addGap(57, 57, 57)
+                        .addComponent(jButton1)
+                        .addGap(28, 28, 28))))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -568,7 +577,8 @@ public class Blackjack extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNuevo)
-                        .addComponent(btnSaldo)))
+                        .addComponent(btnSaldo)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(237, 237, 237))
         );
 
@@ -578,7 +588,7 @@ public class Blackjack extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -720,7 +730,6 @@ public class Blackjack extends javax.swing.JFrame {
         this.btnOtra1.setEnabled(false);
         this.btnStop1.setEnabled(false);
         if (this.crupier) {
-            System.out.println("ENTRO A OTRA CARTA");
             this.otraCartaCrupier();
             String resultado = this.myCasino.ganadorCrupier();
             this.txtJugadores.setText(resultado);
@@ -744,14 +753,15 @@ public class Blackjack extends javax.swing.JFrame {
             Ventana.imp("No puede jugar contra el mismo", "Sistema");
             return;
         }
+        /*String cad=this.myCasino.haberBlackJackCrupier();
+        if(cad.equalsIgnoreCase("No se puede iniciar la partida porque el jugador lleva 10 partidas")){
+            
+        }*/
 
         if (this.crupier) {
             this.startCrupier();
-            //this.otraCartaCrupier();
-            System.out.println("inicio del jugego con crupier");
             String cad = this.myCasino.haberBlackJackCrupier();
             if (!cad.equalsIgnoreCase("No hay BlackJack,¡Sigue jugador 1! :D")) {
-                System.out.println("SI HUBO BLACKJACK");
                 this.txtJugadores.setText(cad);
                 this.btnOtra1.setEnabled(false);
                 this.btnStop1.setEnabled(false);
@@ -943,6 +953,12 @@ public class Blackjack extends javax.swing.JFrame {
         // TODO add your handling code here:
         //this.jug2Seleccionado();
     }//GEN-LAST:event_cmbJug2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.limpiarVista();
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
     /*
     private void jug1Seleccionado() {
         try {
@@ -1012,6 +1028,7 @@ public class Blackjack extends javax.swing.JFrame {
     private javax.swing.JButton btnStop2;
     private javax.swing.JComboBox<String> cmbJug1;
     private javax.swing.JComboBox<String> cmbJug2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
